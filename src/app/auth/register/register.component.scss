@@ -5,19 +5,72 @@
     justify-content: center;
     align-items: center;
     background: url(../../../assets/images/bg.png) no-repeat;
+    background-size: contain;
     background-position: center center;
     background-size: 100%;
     .form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         .name{
-            background-color: rgba(0, 0, 0, 0.503);
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.252);
             padding: 3rem 0;
             text-align: center;
-            border-radius: 5px 5px 0 0;
+            border-radius: 10px 10px 0 0;
+            // font-family: 'alkMtavruli';
+            color: white;
         }
         form{
             background-color: white;
-            padding: 1rem;
-            border-radius: 5px;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            >div{
+                border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+            }
+            input{
+                border: none;
+                outline: none;
+                height: 30px;
+                padding-top: 10px;
+                padding-left: 10px;
+                &::placeholder{
+                    font-family: 'alkMtavruli';
+                    font-size: 1.5rem;
+                }
+            }
+            .signUp{
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                background-color: rgb(64, 64, 64);
+                color: white;
+                cursor: pointer;
+                margin-top: 1rem;
+                font-family: 'kirovi';
+                font-size: larger;
+            }
         }
+        a{
+            margin: 1rem 0;
+            color: white;
+            font-family: 'kirovi';
+            text-decoration: underline;
+            font-size: larger;
+        }
+        .main{
+            margin: 0;
+            color: yellow;
+        }
+    
     }
 }
