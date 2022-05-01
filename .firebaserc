@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "litp-4bf6a": {
+      "hosting": {
+        "litP": [
+          "litp-4bf6a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "litp-4bf6a"
+  }
+}
