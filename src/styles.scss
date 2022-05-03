@@ -36,6 +36,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   a{
     text-decoration: none;
   }
+
+
+  // global classes
+  .errors{
+    font-size: 0.8rem;
+    color: red;
+    font-family: 'kirovi';
+  }
     // fonts
     @font-face {
       font-family: "alkMtavruli";
@@ -51,6 +59,24 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       src: url("./assets/fonts/kirovi/GLKirovi-Bold.woff2") format("woff2"),
         url("./assets/fonts/kirovi/GLKirovi-Bold.woff") format("woff"),
         url("./assets/fonts/kirovi/GLKirovi-Bold.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "alkNusxuri";
+      src: url("./assets/fonts/alk-nusx/ALKTallNusxuri.woff2") format("woff2"),
+        url("./assets/fonts/alk-nusx/ALKTallNusxuri.woff") format("woff"),
+        url("./assets/fonts/alk-nusx/ALKTallNusxuri.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "dmmaro";
+      src: url("./assets/fonts/dmmaro/DMMaro-Regular.woff2") format("woff2"),
+        url("./assets/fonts/dmmaro/DMMaro-Regular.woff") format("woff"),
+        url("./assets/fonts/dmmaro/DMMaro-Regular.ttf") format("truetype");
       font-weight: normal;
       font-style: normal;
       font-display: swap;

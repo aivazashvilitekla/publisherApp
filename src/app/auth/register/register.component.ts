@@ -1,30 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { faUser, faLock} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
-import { MatchPassword, patternValidator } from 'src/app/shared/utils';
+import { MatchPassword, patternValidator, showAuthError } from 'src/app/shared/utils';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   faUser = faUser;
   faLock = faLock;
-  
+  faEye = faEye;
+
   registerForm: FormGroup | undefined;
+  submitted = false;
   passwordVisibility = false;
   confirmPasswordVisibility = false;
 
-  constructor(private authService: AuthenticationService, private fb: FormBuilder, private router: Router,) { }
+  constructor(
+    private authService: AuthenticationService,
+    private fb: FormBuilder,
+    private router: Router,
+    private loadingService: LoadingService,
+    private toastrService: ToastrMessagesService
+  ) {}
 
   ngOnInit(): void {
-  }
-  register(){
     this._initRegisterForm();
-    this.authService.SignUp('tekla@gmail.com', 'Tekla123')
+  }
+  register() {
+    this.authService.SignUp('tekla@gmail.com', 'Tekla123');
   }
   private _initRegisterForm() {
     this.registerForm = this.fb.group(
@@ -42,23 +53,23 @@ export class RegisterComponent implements OnInit {
     );
   }
   onSubmit() {
-    // this.submitted = true;
+    this.submitted = true;
+    console.log(this.registerForm?.valid)
     if (this.registerForm?.valid) {
       const user = this.registerForm.value;
-      // this.loadingService.startLoading();
+      this.loadingService.startLoading();
       this.authService
         .SignUp(user.email, user.password)
         .pipe(finalize(() => this.loadingService.stopLoading()))
         .subscribe({
-          //TODO
-          // next: () => this.router.navigate(['/sadme']),
-          // error: (err) =>
-          //   this.toastrService.showErrorMessage(showAuthError(err)),
+          next: () => this.router.navigate(['/']),
+          error: (err) =>
+            this.toastrService.showErrorMessage(showAuthError(err)),
         });
     } else {
-      // this.toastrService.showErrorMessage(
-      //   'Not all fields in form group are valid.'
-      // );
+      this.toastrService.showErrorMessage(
+        'Not all fields in form group are valid.'
+      );
     }
   }
   togglePassword() {

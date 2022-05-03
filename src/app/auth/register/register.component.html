@@ -1,28 +1,87 @@
+<app-loading></app-loading>
 <section class="register">
-    <div class="form">
-        <div class="name">
-            <!-- dmmaro -->
-            <h1>რეგისტრაცია</h1>
-        </div>
-        <form>
-            <!-- [ALKTallNusxuri] -->
-            <div class="email">
-                <fa-icon [icon]="faUser"></fa-icon>
-                <input type="email"  placeholder="ელ.ფოსტა">
-            </div>
-            <div class="password">
-                <fa-icon [icon]="faLock"></fa-icon>
-                <input type="password" placeholder="პაროლი">
-            </div>
-            <div class="confirmPassword">
-                <fa-icon [icon]="faLock"></fa-icon>
-                <input type="password"  placeholder="გაიმეორეთ პაროლი">
-            </div>
-            <!-- [GLKirovi] -->
-            <button class="signUp" type="button">რეგისტრაცია</button>
-        </form>
-        <!-- [GLKirovi] -->
-        <a routerLink="/login">შესვლა</a>
-        <a routerLink="/" class="main">მთავარი</a>
+  <div class="form">
+    <a routerLink="/login" class="login-link">ავტორიზაცია</a>
+    <div class="name">
+      <h1>რეგისტრაცია</h1>
     </div>
+    <form *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="email">
+        <fa-icon [icon]="faUser"></fa-icon>
+        <input type="email" placeholder="ელ.ფოსტა" formControlName="email" />
+        <fa-icon [icon]="faEye" style="opacity: 0%"></fa-icon>
+      </div>
+      <div class="errors-container">
+        <span
+          class="text-danger errors"
+          *ngIf="(registerForm?.get('email')?.touched || submitted) && registerForm?.get('email')?.errors?.['required']"
+        >
+          ელ.ფოსტა სავალდებულოა.
+        </span>
+        <span
+          class="text-danger errors"
+          *ngIf="registerForm?.get('email')?.touched && registerForm?.get('email')?.errors?.['email']"
+        >
+          შეიყვანეთ ვალიდური ელ ფოსტა.
+        </span>
+      </div>
+
+      <div class="password">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <input
+          type="password"
+          placeholder="პაროლი"
+          [type]="passwordVisibility ? 'text' : 'password'"
+          formControlName="password"
+        />
+        <fa-icon [icon]="faEye" (click)="togglePassword()"></fa-icon>
+      </div>
+      <div class="errors-container">
+        <span
+          class="text-danger errors"
+          *ngIf="(registerForm?.get('password')?.touched || submitted) && registerForm?.get('password')?.errors?.['required']"
+        >
+          პაროლი სავალდებულოა.
+        </span>
+        <span
+              class="text-danger errors"
+              *ngIf="registerForm?.get('password')?.touched && registerForm?.get('password')?.errors?.['invalidPassword']"
+            >
+                პაროლი უნდა იყოს მინიმუმ 8 სიმბოლო და შეიცავდეს ბლა ბლა ბლა.
+                <!-- TODO  change text-->
+              <!-- Password should have minimum 8 characters, at least 1 uppercase
+              letter, 1 lowercase letter and 1 number. -->
+            </span>
+      </div>
+      <div class="confirmPassword">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <input
+          type="password"
+          placeholder="გაიმეორეთ პაროლი"
+          [type]="confirmPasswordVisibility ? 'text' : 'password'"
+          formControlName="confirmPassword"
+        />
+        <fa-icon [icon]="faEye" (click)="toggleConfirmPassword()"></fa-icon>
+      </div>
+      <div class="errors-container">
+        <span
+          class="text-danger errors"
+          *ngIf="(registerForm?.get('confirmPassword')?.touched || submitted)&& registerForm?.get('confirmPassword')?.errors?.['required']"
+        >
+          პაროლი სავალდებულოა.
+        </span>
+        <span
+          class="text-danger errors"
+          *ngIf="(registerForm?.get('confirmPassword')?.touched || submitted) && registerForm?.hasError('notSame')"
+        >
+          პაროლები არ ემთხვევა.
+        </span>
+        <!-- TODO add password validation -->
+      </div>
+      <button class="signUp">რეგისტრაცია</button>
+    </form>
+    <div class="links">
+      <a routerLink="/" class="main">მთავარი</a>
+    </div>
+  </div>
 </section>

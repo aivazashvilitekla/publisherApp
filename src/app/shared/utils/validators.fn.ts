@@ -24,5 +24,5 @@ export function MatchPassword(
     return null;
   }
 
-  return { match: true };
+  return { notSame: true };
 }

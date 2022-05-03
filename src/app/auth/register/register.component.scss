@@ -15,12 +15,13 @@
         align-items: center;
         .name{
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.252);
-            padding: 3rem 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 2rem 0;
             text-align: center;
             border-radius: 10px 10px 0 0;
-            // font-family: 'alkMtavruli';
+            font-family: 'dmmaro';
             color: white;
+            font-size: 3rem;
         }
         form{
             background-color: white;
@@ -30,9 +31,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            >div{
+            >div:not(.errors-container){
                 border-bottom: 1px solid rgba(0, 0, 0, 0.301);
-                margin-bottom: 1rem;
+                margin-top: 1rem;
                 display: flex;
                 align-items: center;
             }
@@ -40,11 +41,10 @@
                 border: none;
                 outline: none;
                 height: 30px;
-                padding-top: 10px;
                 padding-left: 10px;
                 &::placeholder{
-                    font-family: 'alkMtavruli';
-                    font-size: 1.5rem;
+                    font-family: 'alkNusxuri';
+                    font-size: 1.2rem;
                 }
             }
             .signUp{
@@ -59,18 +59,40 @@
                 font-family: 'kirovi';
                 font-size: larger;
             }
+            .errors-container{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 0.5rem;
+            }
         }
-        a{
+        .login-link{
             margin: 1rem 0;
-            color: white;
-            font-family: 'kirovi';
-            text-decoration: underline;
-            font-size: larger;
+                color: white;
+                font-family: 'kirovi';
+                text-decoration: underline;
+                font-size: larger;
         }
-        .main{
-            margin: 0;
-            color: yellow;
+        .links{
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3rem;
+            a{
+                margin: 1rem 0;
+                color: white;
+                font-family: 'kirovi';
+                text-decoration: underline;
+                font-size: larger;
+            }
+            .main{
+                margin: 0;
+                color: rgb(189, 189, 3);
+            }
         }
+        
     
     }
 }

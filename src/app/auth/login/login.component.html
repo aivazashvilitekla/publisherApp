@@ -1,10 +1,46 @@
+<app-loading></app-loading>
 <section class="login">
-    <div class="form">
-        <div class="name">
-            <h1>ავტორიზაცია</h1>
-        </div>
-        <form>
-        </form>
+  <div class="form">
+    <a routerLink="/register" class="register-link">რეგისტრაცია</a>
+    <div class="name">
+      <h1>ავტორიზაცია</h1>
     </div>
-    
+    <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="email">
+        <fa-icon [icon]="faUser"></fa-icon>
+        <input type="email" placeholder="ელ.ფოსტა" formControlName="email" />
+        <fa-icon [icon]="faEye" (click)="togglePassword()" style="opacity: 0%;"></fa-icon>
+      </div>
+      <div class="errors-container">
+        <span
+          class="text-danger errors"
+          *ngIf="(loginForm?.get('email')?.touched || submitted) && loginForm?.get('email')?.errors?.['required']"
+        >
+          ელ.ფოსტა სავალდებულოა.
+        </span>
+      </div>
+      <div class="password">
+        <fa-icon [icon]="faLock"></fa-icon>
+        <input
+          type="password"
+          placeholder="პაროლი"
+          formControlName="password"
+          [type]="passwordVisibility ? 'text' : 'password'"
+        />
+        <fa-icon [icon]="faEye" (click)="togglePassword()"></fa-icon>
+      </div>
+      <div class="errors-container">
+        <span
+          class="text-danger errors"
+          *ngIf="(loginForm?.get('password')?.touched || submitted) && loginForm?.get('password')?.errors?.['required']"
+        >
+          პაროლი სავალდებულოა.
+        </span>
+      </div>
+      <button class="signUp">შესვლა</button>
+    </form>
+    <div class="links">
+      <a routerLink="/" class="main">მთავარი</a>
+    </div>
+  </div>
 </section>
