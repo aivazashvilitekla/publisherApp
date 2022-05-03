@@ -10,9 +10,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthModule } from './auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './shell/header/header.component';
+import { FooterComponent } from './shell/footer/footer.component';
+import { MainComponent } from './shell/main/main.component';
 @NgModule({
   declarations: [
-    AppComponent, HomepageComponent
+    AppComponent, HomepageComponent, HeaderComponent, FooterComponent, MainComponent
   ],
   imports: [
     BrowserModule,
