@@ -81,3 +81,30 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       font-style: normal;
       font-display: swap;
     }
+    @font-face {
+      font-family: "tanamedrove";
+      src: url("./assets/fonts/tanamedrove/tanamedrovea.woff2") format("woff2"),
+        url("./assets/fonts/tanamedrove/tanamedrovea.woff") format("woff"),
+        url("./assets/fonts/tanamedrove/tanamedrovea.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "anastasia";
+      src: url("./assets/fonts/anastasia/LGVAnastasia-Regular.woff2") format("woff2"),
+        url("./assets/fonts/anastasia/LGVAnastasia-Regular.woff") format("woff"),
+        url("./assets/fonts/anastasia/LGVAnastasia-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "bpgNino";
+      src: url("./assets/fonts/bpgNino/bpg_nino_mtavruli_normal.woff2") format("woff2"),
+        url("./assets/fonts/bpgNino/bpg_nino_mtavruli_normal.woff") format("woff"),
+        url("./assets/fonts/bpgNino/bpg_nino_mtavruli_normal.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }

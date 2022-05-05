@@ -1,0 +1,11 @@
+#nav-items{
+    font-family: 'kirovi';
+    a{
+        color: white;
+        font-size: 1.4rem;
+        &:hover{
+            //TODO change color
+            color: rgb(154, 154, 20);
+        }
+    }
+}
