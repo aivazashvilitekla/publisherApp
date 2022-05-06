@@ -1,17 +1,53 @@
-#name{
-    font-size: 20rem;
-    font-family: 'tanamedrove';
-    span{
-        color: yellow;
-        text-decoration: underline;
+#name {
+  font-size: 20rem;
+  font-family: "tanamedrove";
+  span {
+    color: yellow;
+    text-decoration: underline;
+  }
+}
+#icon-hyphen {
+  font-size: 2rem;
+  // TODO font
+  font-family: "anastasia";
+}
+#lex {
+  // font-family: 'bpgNino';
+  // font-size: 1.3rem;
+}
+#card {
+  height: 327px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  a {
+    justify-self: flex-end;
+  }
+}
+#card2 {
+  justify-content: center;
+  align-items: center;
+}
+#use {
+  font-size: 3rem;
+}
+#form-h{
+    font-size: 1.75rem;
+}
+@media only screen and (max-width: 800px) {
+  #use {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+    #name{
+        font-size: 10rem;
     }
-}
-#icon-hyphen{
-    font-size: 2rem;
-    // TODO font
-    font-family: 'anastasia';
-}
-#lex{
-    // font-family: 'bpgNino';
-    // font-size: 1.3rem;
+    #form-h{
+        font-size: 1.2rem;
+    }
+    #form{
+        flex-direction: column;
+    }
 }
