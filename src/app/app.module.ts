@@ -13,9 +13,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './shell/header/header.component';
 import { FooterComponent } from './shell/footer/footer.component';
 import { MainComponent } from './shell/main/main.component';
+import { FileComponent } from './pages/file/file.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
-    AppComponent, HomepageComponent, HeaderComponent, FooterComponent, MainComponent
+    AppComponent,
+    HomepageComponent,
+    HeaderComponent,
+    FooterComponent,
+    MainComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,
@@ -25,8 +32,9 @@ import { MainComponent } from './shell/main/main.component';
     AuthModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

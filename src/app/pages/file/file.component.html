@@ -1,0 +1,21 @@
+<section style="background-color: white; padding: 50px;">
+  <input
+    type="file"
+    class="file-input"
+    (change)="onFileSelected($event)"
+    #fileUpload
+  />
+  <button
+    mat-mini-fab
+    color="primary"
+    class="upload-btn"
+    (click)="fileUpload.click()"
+  >
+    click
+  </button>
+  <button type="button" (click)="test()">hyp</button>
+  <button type="button" (click)="test2()">page</button> <br>
+  <button type="button" (click)="save()">save</button>
+
+  <!-- <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx"> -->
+</section>

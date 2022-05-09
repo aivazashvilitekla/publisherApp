@@ -6,15 +6,15 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  api = 'localhost:44371/api/';
+  api = 'localhost:44371/api';
 
   // localhost:44371/api/TakeDoc [post]
-  uploadFile(body: any){
-    return this.http.post(`${this.api}/TakeDoc`, body)
+  uploadFile(api: string, body: any, obj?: any){
+    return this.http.post(api, body,obj)
   }
   //get
-  hypDoc(fileName: string){
-    return this.http.get(`${this.api}/HypDoc/${fileName}`)
+  hypDoc(api: string, fileName?: string){
+    return this.http.get(api)
   }
 
   // 
