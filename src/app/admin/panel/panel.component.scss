@@ -1,0 +1,31 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1{
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 4rem;
+    }
+    .cards{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 3rem;
+        &>div{
+            cursor: pointer;
+            padding: 2rem 0;
+            background-color: #035569;
+            color: white;
+            font-family: 'firago';
+            border-radius: 1rem;
+            text-align: center;
+            h5{
+                margin-bottom: 0;
+            }
+        }
+    }
+}

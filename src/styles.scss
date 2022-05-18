@@ -12,7 +12,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     display: block; }
   
   body {
-    line-height: 1; }
+    line-height: 1;}
   
   ol, ul {
     list-style: none; }
@@ -104,6 +104,42 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       src: url("./assets/fonts/bpgNino/BPGNinoMtavruli.woff2") format("woff2"),
         url("./assets/fonts/bpgNino/BPGNinoMtavruli.woff") format("woff"),
         url("./assets/fonts/bpgNino/BPGNinoMtavruli.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "formula";
+      src: url("./assets/fonts/formula/Formula1-Display-Regular.woff2") format("woff2"),
+        url("./assets/fonts/formula/Formula1-Display-Regular.woff") format("woff"),
+        url("./assets/fonts/formula/Formula1-Display-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "firago";
+      src: url("./assets/fonts/firago/FiraGO-Regular.woff2") format("woff2"),
+        url("./assets/fonts/firago/FiraGO-Regular.woff") format("woff"),
+        url("./assets/fonts/firago/FiraGO-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "ararchy";
+      src: url("./assets/fonts/ararchy/ARArchyExtraLight.woff2") format("woff2"),
+        url("./assets/fonts/ararchy/ARArchyExtraLight.woff") format("woff"),
+        url("./assets/fonts/ararchy/ARArchyExtraLight.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "archyedt";
+      src: url("./assets/fonts/archyedt/ArchyEDT-Bold.woff2") format("woff2"),
+        url("./assets/fonts/archyedt/ArchyEDT-Bold.woff") format("woff"),
+        url("./assets/fonts/archyedt/ArchyEDT-Bold.ttf") format("truetype");
       font-weight: normal;
       font-style: normal;
       font-display: swap;

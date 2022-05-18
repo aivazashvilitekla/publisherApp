@@ -15,6 +15,10 @@ import { FooterComponent } from './shell/footer/footer.component';
 import { MainComponent } from './shell/main/main.component';
 import { FileComponent } from './pages/file/file.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { SidebarComponent } from './admin/sidebar/sidebar.component';
+import { AdminRoutingModule } from './admin/admin-routing.module';
+import { DataComponent } from './admin/data/data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    FileComponent
+    FileComponent,
+    AdminDashboardComponent,
+    SidebarComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    AdminRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
