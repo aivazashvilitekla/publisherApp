@@ -17,12 +17,24 @@
 }
 #card {
   height: 327px;
+  #icon-hyphen, &>div{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   a {
-    justify-self: flex-end;
+    justify-self: center;
+  }
+  .txt{
+    width: 50%;
+    font-size: 85%;
   }
 }
 #card2 {
@@ -35,7 +47,28 @@
 #form-h{
     font-size: 1.75rem;
 }
+@media only screen and (max-width: 1300px) {
+  #pricing >div{
+    
+    flex-direction: column;
+    &>div{
+      width: 100% !important;
+      &>div>div{
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  #features #feature-container{
+    flex-direction: column;
+  }
+}
 @media only screen and (max-width: 800px) {
+  #card2{
+    flex-direction: column;
+  }
   #use {
     font-size: 1rem;
   }
@@ -49,5 +82,8 @@
     }
     #form{
         flex-direction: column;
+    }
+    #card2>div>div{
+      padding: 1rem !important;
     }
 }

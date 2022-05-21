@@ -17,7 +17,7 @@
       <div class="br-8 mt-10 inline-flex">
         <input
           type="text"
-          class="input-lg half bw-0 fw-200 bg-indigo-lightest-10 white ph-indigo-lightest focus-white opacity-80 fs-s3 py-5 min-w-25vw br-r-0"
+          class="input-lg half bw-0 fw-200 bg-indigo-lightest-10 white ph-indigo-lightest focus-white opacity-80 fs-s3  min-w-25vw br-r-0"
           placeholder="ელ-ფოსტა"
         />
         <button
@@ -35,35 +35,95 @@
 
 <!-- features -->
 <section id="features" class="p-10 ">
-  <div class="flex flex-column md-flex-row mx-auto ">
+  <div class="flex md-flex-row mx-auto " id="feature-container">
     <div class="w-100pc md-w-40pc">
-      <div class="br-8 p-5 m-5 items-center text-center" id="card">
-        <div
-          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round mb-5"
+      <div class="br-8  m-5 items-center text-center" id="card">
+        <div class="bg-indigo-lightest-10 br-round w-l5 h-l5"
           id="icon-hyphen"
         >
           ა
         </div>
-        <h4 class="white fw-600 fs-m3 mb-5">ტექსტის დამარცვლა</h4>
-        <div class="indigo-lightest fw-600 fs-m1 lh-2 opacity-50">
+        <h4 class="white fw-600 fs-m2">ტექსტის დამარცვლა</h4>
+        <div class="indigo-lightest fw-600 txt opacity-50 lh-2">
           დამარცვლე ტექსტი სწორად. გაამზადე ის დასაბეჭდად, დააკაბადონე წიგნები
         </div>
         <a
           href="#"
-          class="mt-5 button bg-indigo-lightest-10 fs-s3 white no-underline hover-opacity-100 hover-scale-up-1 ease-300"
+          class=" button bg-indigo-lightest-10 fs-s3 white no-underline hover-opacity-100 hover-scale-up-1 ease-300 "
           >დამარცვლა</a
         >
       </div>
     </div>
     <div class="w-100pc md-w-40pc">
-      <div class="br-8 p-5 m-5 items-center text-center" id="card">
+      <div class="br-8  m-5 items-center text-center" id="card">
         <div
-          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round mb-5"
+          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round "
         >
         
         <i data-feather="edit-3" class="w-l5"></i>
         </div>
-        <h4 class="white fw-600 fs-m3 mb-5">კორექტორი</h4>
+        <h4 class="white fw-600 fs-m2 ">კორექტორი</h4>
+        <div class="indigo-lightest fw-600 txt opacity-50 lh-2">
+          შეამოწმე მექანიკურად დაშვებული შეცდომები ტექსტში, ან გამართე ის
+          გრამატიკულად.
+        </div>
+        <a
+          href="#"
+          class=" button bg-indigo-lightest-10 fs-s3 white no-underline hover-opacity-100 hover-scale-up-1 ease-300"
+          >კორექტორი</a
+        >
+      </div>
+    </div>
+    <div class="w-100pc md-w-40pc">
+      <div class="br-8  m-5 items-center text-center" id="card">
+        <div
+          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round "
+        >
+          <i data-feather="book" class="w-l5"></i>
+        </div>
+        <h4 class="white fw-600 fs-m2 ">ლექსიკონი</h4>
+        <div class="indigo-lightest fw-600 txt opacity-50 lh-2">
+          იქნებ, უკეთესი სინონიმი ნახო აქ? გამოიყენე ქართული ენის ლექსიკონი.
+        </div>
+        <a
+          href="#"
+          class=" button bg-indigo-lightest-10 fs-s3 white no-underline hover-opacity-100 hover-scale-up-1 ease-300"
+          >ლექსიკონი</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <section id="features" class="p-10 ">
+  <div class="flex md-flex-row mx-auto " id="feature-container">
+    <div class="w-100pc md-w-40pc">
+      <div class="br-8  m-5 items-center text-center" id="card">
+        <div
+          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round "
+          id="icon-hyphen"
+        >
+          ა
+        </div>
+        <h4 class="white fw-600 fs-m3 ">ტექსტის დამარცვლა</h4>
+        <div class="indigo-lightest fw-600 fs-m1 lh-2 opacity-50">
+          დამარცვლე ტექსტი სწორად. გაამზადე ის დასაბეჭდად, დააკაბადონე წიგნები
+        </div>
+        <a
+          href="#"
+          class=" button bg-indigo-lightest-10 fs-s3 white no-underline hover-opacity-100 hover-scale-up-1 ease-300"
+          >დამარცვლა</a
+        >
+      </div>
+    </div>
+    <div class="w-100pc md-w-40pc">
+      <div class="br-8  m-5 items-center text-center" id="card">
+        <div
+          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round "
+        >
+        
+        <i data-feather="edit-3" class="w-l5"></i>
+        </div>
+        <h4 class="white fw-600 fs-m3 ">კორექტორი</h4>
         <div class="indigo-lightest fw-600 fs-m1 opacity-50 lh-2">
           შეამოწმე მექანიკურად დაშვებული შეცდომები ტექსტში, ან გამართე ის
           გრამატიკულად.
@@ -76,13 +136,13 @@
       </div>
     </div>
     <div class="w-100pc md-w-40pc">
-      <div class="br-8 p-5 m-5 items-center text-center" id="card">
+      <div class="br-8  m-5 items-center text-center" id="card">
         <div
-          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round mb-5"
+          class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round "
         >
           <i data-feather="book" class="w-l5"></i>
         </div>
-        <h4 class="white fw-600 fs-m3 mb-5">ლექსიკონი</h4>
+        <h4 class="white fw-600 fs-m3 ">ლექსიკონი</h4>
         <div class="indigo-lightest fw-600 fs-m1 opacity-50 lh-2">
           იქნებ, უკეთესი სინონიმი ნახო აქ? გამოიყენე ქართული ენის ლექსიკონი.
         </div>
@@ -94,7 +154,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- slider -->
 <section class="relative bg-indigo-lightest-10">
@@ -170,7 +230,7 @@
 
 <!-- product options -->
 <section class="">
-  <div class="flex flex-column md-flex-row md-w-80pc mx-auto" id="card2">
+  <div class="flex  md-flex-row md-w-80pc mx-auto" id="card2">
     <div class="w-100pc md-w-50pc">
       <div
         class="br-8 p-5 m-5  bg-indigo-lightest-10 pointer hover-scale-up-1 ease-300"
@@ -220,7 +280,7 @@
   <div class="p-10 flex flex-wrap">
     <div class="w-100pc md-w-50pc">
       <div class="p-5">
-        <h4 class="white fw-800 fs-l3 mb-5">ფასები</h4>
+        <h4 class="white fw-800 fs-l3 mb-3">ფასები</h4>
         <div class="indigo-lightest fw-600 fs-m1 opacity-50">
           პროგრამის გამოყენება უფასოა, თუმცა თუკი პრემიუმს იყიდი, შეძლებ ბევრად
           დიდი მიზნების ბევრად მოკლე დროში შესრულებას.
@@ -497,7 +557,7 @@
       <div class="flex my-5" id="form">
         <input
           type="text"
-          class="input-lg flex-grow-1 bw-0 fw-200 bg-indigo-lightest-10 white ph-indigo-lightest focus-white opacity-80 fs-s3 py-5 br-r-0"
+          class="input-lg flex-grow-1 bw-0 fw-200 bg-indigo-lightest-10 white ph-indigo-lightest focus-white opacity-80 fs-s3  br-r-0"
           placeholder="ელ-ფოსტა"
         />
         <button class="button-lg bg-indigo indigo-lightest fw-300 fs-s3 br-l-0">

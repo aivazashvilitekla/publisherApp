@@ -1,19 +1,32 @@
-#nav-items{
-    font-family: 'kirovi';
-    a{
-        color: white;
-        font-size: 1.4rem;
-        &:hover{
-            //TODO change color
-            color: rgb(154, 154, 20);
+nav{
+    width: 100%;
+    justify-content: space-between;
+    #nav-items{
+        font-family: 'kirovi';
+        a{
+            color: white;
+            font-size: 1.4rem;
+            &:hover{
+                //TODO change color
+                color: rgb(154, 154, 20);
+            }
         }
     }
 }
 
 @media only screen and (max-width: 1024px) {
-    #nav-items{
+    nav #nav-items{
         a{
-            font-size: 1rem;
+            font-size: 0.7rem;
         }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .menu-div{
+        width: 100%;
+    }
+    nav, nav #nav-items{
+        flex-direction: column;
     }
   }
