@@ -144,3 +144,30 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       font-style: normal;
       font-display: swap;
     }
+    @font-face {
+      font-family: "glMkafio";
+      src: url("./assets/fonts/gl-mkafio/GLMkafio-Book.woff2") format("woff2"),
+        url("./assets/fonts/gl-mkafio/GLMkafio-Book.woff") format("woff"),
+        url("./assets/fonts/gl-mkafio/GLMkafio-Book.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "galaktioni";
+      src: url("./assets/fonts/galaktioni/DMGalaktioniUNI.woff2") format("woff2"),
+        url("./assets/fonts/galaktioni/DMGalaktioniUNI.woff") format("woff"),
+        url("./assets/fonts/galaktioni/DMGalaktioniUNI.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "ninoElite";
+      src: url("./assets/fonts/nino-elite/BPGNinoEliteCond.woff2") format("woff2"),
+        url("./assets/fonts/nino-elite/BPGNinoEliteCond.woff") format("woff"),
+        url("./assets/fonts/nino-elite/BPGNinoEliteCond.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }

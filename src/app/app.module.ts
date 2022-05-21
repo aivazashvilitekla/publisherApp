@@ -19,6 +19,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { DataComponent } from './admin/data/data.component';
+import { ProcessingComponent } from './pages/processing/processing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { DataComponent } from './admin/data/data.component';
     FileComponent,
     AdminDashboardComponent,
     SidebarComponent,
-    DataComponent
+    DataComponent,
+    ProcessingComponent
   ],
   imports: [
     BrowserModule,

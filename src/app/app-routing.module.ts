@@ -9,6 +9,8 @@ import { UsersComponent } from './admin/users/users.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { FileComponent } from './pages/file/file.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { ProcessingComponent } from './pages/processing/processing.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 const routes: Routes = [
   {
@@ -22,12 +24,16 @@ const routes: Routes = [
     component: FileComponent
   },
   {
+    path: 'processing',
+    component: ProcessingComponent
+  },
+  {
     path: 'admin',
     component: AdminDashboardComponent,
     children: [
       {
         path: '',
-        redirectTo: 'admin',
+        redirectTo: 'panel',
         pathMatch: 'full'
       },
       {
