@@ -20,6 +20,14 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { DataComponent } from './admin/data/data.component';
 import { ProcessingComponent } from './pages/processing/processing.component';
+
+// firebase
+// import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { BlogComponent } from './pages/blog/blog.component';
+import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,18 +39,25 @@ import { ProcessingComponent } from './pages/processing/processing.component';
     AdminDashboardComponent,
     SidebarComponent,
     DataComponent,
-    ProcessingComponent
+    ProcessingComponent,
+    BlogComponent,
+    BlogPanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireModule.initializeApp(environment.firebase),
     FontAwesomeModule,
     AuthModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ReactiveFormsModule,
+
+    // AngularFirestore
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,44 @@
+<div class="container">
+  <h1>ახალი პოსტი</h1>
+  <div class="card">
+    <div class="add">
+      <button class="btn btn-primary" (click)="addNewPost()">
+        <fa-icon *ngIf="!newPost" [icon]="faAdd"></fa-icon>  
+        <span *ngIf="!newPost"> ახალი პოსტი</span>
+        <span *ngIf="newPost"> გაუქმება</span>
+      </button>
+      <form
+        *ngIf="postForm && newPost"
+        [formGroup]="postForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <input type="text" placeholder="სათაური" formControlName="title" />
+        <input type="text" placeholder="ტექსტი" formControlName="content" />
+        <input type="text" placeholder="სტატუსი" formControlName="status" />
+        <input type="text" placeholder="ფოტო" formControlName="img" />
+        <button type="submit">დამატება</button>
+      </form>
+    </div>
+    <div class="posts">
+      <h2 class="h2 text-white">პოსტები</h2>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">სათაური</th>
+            <th scope="col">სტატუსი</th>
+            <th scope="col">ტექსტი</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of posts$ | async; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{post.title}}</td>
+            <td>{{post.status}}</td>
+            <td>{{post.content}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
