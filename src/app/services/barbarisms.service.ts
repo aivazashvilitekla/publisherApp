@@ -1,8 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 export interface Barbarism {
-  id?: number;
+  Id?: number;
+  Wrong_Word: string;
+  Correct_Word: string;
+  Description: string;
+}
+export interface BarbarismPost {
+  Id: number;
   Wrong_Word: string;
   Correct_Word: string;
   Description: string;
@@ -13,8 +19,8 @@ export interface Barbarism {
 export class BarbarismsService {
   constructor(private http: HttpClient) { }
 
-  getBarbarisms(api: string): Observable<Barbarism[]> {
-    return this.http.get<Barbarism[]>(api);
+  getBarbarisms(api: string): Observable<BarbarismPost[]> {
+    return this.http.get<BarbarismPost[]>(api);
   }
   //get
   getBarbarism(api: string) {
@@ -25,8 +31,10 @@ export class BarbarismsService {
   addBarbarism(api: string, body: Barbarism) {
     return this.http.post(api, body);
   }
-  editBarbarism(api: string, body: Barbarism) {
-    return this.http.put(api, body);
+  editBarbarism(api: string, body: any) {
+    const headers = new HttpHeaders()
+    .set("Content-Type", "application/json");
+    return this.http.put(api, body, {headers});
   }
   deleteBarbarism(api: string) {
     return this.http.delete(api);

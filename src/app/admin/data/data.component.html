@@ -3,10 +3,14 @@
   <div class="card">
     <div class="add">
       <form *ngIf="barbarismForm" [formGroup]="barbarismForm" (ngSubmit)="onSubmit()">
-        <input type="text" placeholder="სწორი ფორმა" formControlName="wrong_word" />
-        <input type="text" placeholder="არასწორი ფორმა" formControlName="correct_word" />
-        <input type="text" placeholder="აღწერა" formControlName="description" />
-        <button type="submit">დამატება</button>
+        <input type="text" placeholder="სწორი ფორმა" formControlName="Wrong_Word" />
+        <input type="text" placeholder="არასწორი ფორმა" formControlName="Correct_Word" />
+        <input type="text" placeholder="აღწერა" formControlName="Description"  *ngIf="!editingMode"/>
+        <div class="buttons flex gap-2">
+          <button type="submit" *ngIf="!editingMode">დამატება</button>
+          <button type="button" *ngIf="editingMode" (click)="updateWord()">რედაქტირება</button>
+          <button type="button" *ngIf="editingMode" class="text-danger" (click)="closeEditing()">გაუქმება</button>
+        </div>
       </form>
     </div>
     <div class="data">
@@ -18,8 +22,11 @@
       </div>
       <div class="words" >
         <div class="word-card" *ngFor="let barbarism of barbarisms$ | async">
-          <h2>{{barbarism.Correct_Word}} —> {{barbarism.Description}}</h2>
-          
+          <h2>{{barbarism.Wrong_Word}} —> {{barbarism.Correct_Word}}</h2>
+          <div class="actions">
+            <fa-icon [icon]="faEdit" class="text-info pointer" (click)="editMode(barbarism)"></fa-icon>
+            <fa-icon [icon]="faTrash" class="text-danger pointer" (click)="deleteWord(barbarism.Id)"></fa-icon>
+          </div>
         </div>
       </div>
     </div>

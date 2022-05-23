@@ -97,9 +97,11 @@
                     padding: 1rem;
                     border-bottom: 1px solid black;
                     font-family: 'archyedt';
-                    h3{
-                        margin-top: 5px;
-                        color: grey;
+                    display: flex;
+                    justify-content: space-between;
+                    .actions{
+                        display: flex;
+                        gap: 1rem;
                     }
                 }
             }

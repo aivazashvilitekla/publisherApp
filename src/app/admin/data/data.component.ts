@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable } from 'rxjs';
 import {
   Barbarism,
+  BarbarismPost,
   BarbarismsService,
 } from 'src/app/services/barbarisms.service';
 import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
@@ -14,10 +15,14 @@ import { ToastrMessagesService } from 'src/app/services/toastr-messages.service'
 })
 export class DataComponent implements OnInit {
   faSearch = faSearch;
+  faEdit = faEdit;
+  faTrash = faTrash;
 
   barbarismForm: FormGroup | undefined;
   submitted: boolean = false;
-  barbarisms$: Observable<Barbarism[]> | undefined;
+  barbarisms$: Observable<BarbarismPost[]> | undefined;
+  editingMode = false;
+  editingWordId: number | undefined;
 
   constructor(
     private barbarismService: BarbarismsService,
@@ -27,9 +32,9 @@ export class DataComponent implements OnInit {
 
   private _initBarbarismForm() {
     this.barbarismForm = this.fb.group({
-      wrong_word: ['', Validators.required],
-      correct_word: ['', Validators.required],
-      description: ['', Validators.required],
+      Wrong_Word: ['', Validators.required],
+      Correct_Word: ['', Validators.required],
+      Description: ['', Validators.required],
     });
   }
   ngOnInit() {
@@ -55,11 +60,54 @@ export class DataComponent implements OnInit {
         complete: () => {
           this.barbarismForm?.reset();
           this.toastrService.showSuccessMessage('სიტყვა წარმატებით დაემატა');
-          this.getBarbarisms()
+          this.getBarbarisms();
         },
       });
     } else {
       console.log(';fsdfd');
     }
+  }
+  editMode(barbarism: BarbarismPost) {
+    this.editingMode = true;
+    this.editingWordId = barbarism.Id;
+    this.barbarismForm?.patchValue({
+      Wrong_Word: barbarism.Wrong_Word,
+      Correct_Word: barbarism.Correct_Word,
+    });
+  }
+  updateWord() {
+    if (this.editingWordId) {
+      const api = `https://localhost:44371/api/Barbarism/EditBarbarism/${this.editingWordId}`;
+      const corWord = this.barbarismForm?.value.Correct_Word;
+      const wrWord = this.barbarismForm?.value.Wrong_Word;
+      if (corWord && wrWord) {
+        const body: any = {
+          Id: this.editingWordId,
+          Wrong_Word: corWord,
+          Correct_Word: wrWord,
+        };
+        console.log(body)
+        this.barbarismService.editBarbarism(api, JSON.stringify(body)).subscribe({
+          complete: () => {
+            this.barbarismForm?.reset();
+            this.toastrService.showSuccessMessage(
+              'სიტყვა წარმატებით დარედაქტირდა'
+            );
+            this.getBarbarisms();
+            this.editingMode = false;
+          },
+        });
+      }
+    }
+  }
+  deleteWord(id: number) {
+    const api = `https://localhost:44371/api/Barbarism/DeleteBarbarism/${id}`;
+    this.barbarismService.deleteBarbarism(api).subscribe({
+      complete: () => this.getBarbarisms(),
+    });
+  }
+  closeEditing() {
+    this.barbarismForm?.reset();
+    this.editingMode = false;
   }
 }
