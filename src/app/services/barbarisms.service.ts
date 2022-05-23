@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 export interface Barbarism {
   id?: number;
-  wrong_word: string;
-  correct_word: string;
-  description: string;
+  Wrong_Word: string;
+  Correct_Word: string;
+  Description: string;
 }
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,8 @@ export interface Barbarism {
 export class BarbarismsService {
   constructor(private http: HttpClient) { }
 
-  getBarbarisms(api: string) {
-    return this.http.get(api);
+  getBarbarisms(api: string): Observable<Barbarism[]> {
+    return this.http.get<Barbarism[]>(api);
   }
   //get
   getBarbarism(api: string) {

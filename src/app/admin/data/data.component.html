@@ -2,11 +2,11 @@
   <h1>ბარბარიზმები</h1>
   <div class="card">
     <div class="add">
-      <form>
-        <input type="text" placeholder="ჩაწერეთ სიტყვა" />
-        <input type="text" placeholder="სინონიმი" />
-        <input type="text" placeholder="მიზეზი" />
-        <button>დამატება</button>
+      <form *ngIf="barbarismForm" [formGroup]="barbarismForm" (ngSubmit)="onSubmit()">
+        <input type="text" placeholder="სწორი ფორმა" formControlName="wrong_word" />
+        <input type="text" placeholder="არასწორი ფორმა" formControlName="correct_word" />
+        <input type="text" placeholder="აღწერა" formControlName="description" />
+        <button type="submit">დამატება</button>
       </form>
     </div>
     <div class="data">
@@ -16,42 +16,10 @@
           <input type="text" placeholder="ძებნა" />
         </form>
       </div>
-      <div class="words">
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
-        </div>
-        <div class="word-card">
-          <h2>ასპირანტი</h2>
-          <h3>ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა ბლა</h3>
+      <div class="words" >
+        <div class="word-card" *ngFor="let barbarism of barbarisms$ | async">
+          <h2>{{barbarism.Correct_Word}} —> {{barbarism.Description}}</h2>
+          
         </div>
       </div>
     </div>

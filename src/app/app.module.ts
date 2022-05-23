@@ -41,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DataComponent,
     ProcessingComponent,
     BlogComponent,
-    BlogPanelComponent
+    BlogPanelComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,
