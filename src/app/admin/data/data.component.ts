@@ -53,9 +53,9 @@ export class DataComponent implements OnInit {
       const post = this.barbarismForm.value;
       console.log(this.barbarismForm.value);
       const body: Barbarism = {
-        Wrong_Word: post.wrong_word,
-        Correct_Word: post.correct_word,
-        Description: post.description,
+        Wrong_Word: post.Wrong_Word,
+        Correct_Word: post.Correct_Word,
+        Description: post.Description,
       };
       console.log(body);
       this.barbarismService.addBarbarism(api, body).subscribe({
