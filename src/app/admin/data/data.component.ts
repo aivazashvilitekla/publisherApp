@@ -51,11 +51,13 @@ export class DataComponent implements OnInit {
 
     if (this.barbarismForm?.valid) {
       const post = this.barbarismForm.value;
+      console.log(this.barbarismForm.value);
       const body: Barbarism = {
         Wrong_Word: post.wrong_word,
         Correct_Word: post.correct_word,
         Description: post.description,
       };
+      console.log(body);
       this.barbarismService.addBarbarism(api, body).subscribe({
         complete: () => {
           this.barbarismForm?.reset();
