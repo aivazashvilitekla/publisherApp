@@ -13,27 +13,42 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { FileComponent } from './pages/file/file.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ProcessingComponent } from './pages/processing/processing.component';
+import { UploadFileComponent } from './pages/upload-file/upload-file.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
+import { MainComponent } from './shell/main/main.component';
 
 const routes: Routes = [
   {
     path: '',
     // canActivate: [AnonymousGuard],
     component: HomepageComponent,
-    pathMatch: 'full',
+    // pathMatch: 'full',
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        component: MainComponent,
+      },
+
+      {
+        path: 'processing',
+        component: ProcessingComponent,
+      },
+      {
+        path: 'blog',
+        component: BlogComponent,
+      },
+      {
+        path: 'upload-file',
+        component: UploadFileComponent,
+      },
+    ],
   },
-  {
-    path: 'file',
-    component: FileComponent,
-  },
-  {
-    path: 'processing',
-    component: ProcessingComponent,
-  },
-  {
-    path: 'blog',
-    component: BlogComponent,
-  },
+
   {
     path: 'admin',
     component: AdminDashboardComponent,

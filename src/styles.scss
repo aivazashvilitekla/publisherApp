@@ -171,3 +171,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       font-style: normal;
       font-display: swap;
     }
+    @font-face {
+      font-family: "firagoThinItalic";
+      src: url("./assets/fonts/firagoThinItalic/FiraGO-ThinItalic.woff2") format("woff2"),
+        url("./assets/fonts/firagoThinItalic/FiraGO-ThinItalic.woff") format("woff"),
+        url("./assets/fonts/firagoThinItalic/FiraGO-ThinItalic.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }

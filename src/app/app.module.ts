@@ -29,6 +29,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MorphologyComponent } from './admin/morphology/morphology.component';
+import { UploadFileComponent } from './pages/upload-file/upload-file.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { MorphologyComponent } from './admin/morphology/morphology.component';
     BlogPanelComponent,
     DataComponent,
     MorphologyComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,
