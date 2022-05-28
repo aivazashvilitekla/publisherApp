@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faSearch, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { map, Observable } from 'rxjs';
+import { debounceTime, map, Observable, of, tap } from 'rxjs';
 import {
   Barbarism,
   BarbarismPost,
@@ -19,10 +19,13 @@ export class DataComponent implements OnInit {
   faTrash = faTrash;
 
   barbarismForm: FormGroup | undefined;
+  searchForm: FormGroup | undefined;
   submitted: boolean = false;
   barbarisms$: Observable<BarbarismPost[]> | undefined;
   editingMode = false;
   editingWordId: number | undefined;
+
+  searchedArr: BarbarismPost[] = [];
 
   constructor(
     private barbarismService: BarbarismsService,
@@ -38,8 +41,10 @@ export class DataComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this._initSearchForm();
     this._initBarbarismForm();
     this.getBarbarisms();
+    this.listeningSearch();
   }
   getBarbarisms() {
     this.barbarisms$ = this.barbarismService.getBarbarisms(
@@ -77,6 +82,35 @@ export class DataComponent implements OnInit {
       Correct_Word: barbarism.Correct_Word,
     });
   }
+  private _initSearchForm() {
+    this.searchForm = this.fb.group({
+      searchText: '',
+    });
+  }
+  listeningSearch() {
+    if (this.searchForm)
+      this.searchForm.valueChanges
+        .pipe(debounceTime(700))
+        .subscribe(({ searchText }) => {
+          if (!searchText) {
+            this.getBarbarisms();
+            return;
+          }
+          this.searchedArr = [];
+          const temp = this.barbarisms$?.pipe(
+            tap((data) => {
+              const t = data.find(
+                (item) =>
+                  item.Correct_Word.includes(searchText) ||
+                  item.Correct_Word === searchText
+              );
+              if (t) this.searchedArr?.push(t);
+            })
+          );
+          temp?.subscribe();
+          if (this.searchedArr) this.barbarisms$ = of(this.searchedArr);
+        });
+  }
   updateWord() {
     if (this.editingWordId) {
       const api = `https://localhost:44371/api/Barbarism/EditBarbarism/${this.editingWordId}`;
@@ -85,20 +119,22 @@ export class DataComponent implements OnInit {
       if (corWord && wrWord) {
         const body: any = {
           Id: this.editingWordId,
-          Wrong_Word: corWord,
-          Correct_Word: wrWord,
+          Wrong_Word: wrWord,
+          Correct_Word: corWord,
         };
-        console.log(body)
-        this.barbarismService.editBarbarism(api, JSON.stringify(body)).subscribe({
-          complete: () => {
-            this.barbarismForm?.reset();
-            this.toastrService.showSuccessMessage(
-              'სიტყვა წარმატებით დარედაქტირდა'
-            );
-            this.getBarbarisms();
-            this.editingMode = false;
-          },
-        });
+        console.log(body);
+        this.barbarismService
+          .editBarbarism(api, JSON.stringify(body))
+          .subscribe({
+            complete: () => {
+              this.barbarismForm?.reset();
+              this.toastrService.showSuccessMessage(
+                'სიტყვა წარმატებით დარედაქტირდა'
+              );
+              this.getBarbarisms();
+              this.editingMode = false;
+            },
+          });
       }
     }
   }

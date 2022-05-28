@@ -28,6 +28,7 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MorphologyComponent } from './admin/morphology/morphology.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProcessingComponent,
     BlogComponent,
     BlogPanelComponent,
-    DataComponent
+    DataComponent,
+    MorphologyComponent,
   ],
   imports: [
     BrowserModule,

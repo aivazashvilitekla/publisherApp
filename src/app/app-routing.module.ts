@@ -4,6 +4,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
 import { DataComponent } from './admin/data/data.component';
+import { MorphologyComponent } from './admin/morphology/morphology.component';
 import { PanelComponent } from './admin/panel/panel.component';
 import { StatisticsComponent } from './admin/statistics/statistics.component';
 import { UsersComponent } from './admin/users/users.component';
@@ -19,19 +20,19 @@ const routes: Routes = [
     path: '',
     // canActivate: [AnonymousGuard],
     component: HomepageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'file',
-    component: FileComponent
+    component: FileComponent,
   },
   {
     path: 'processing',
-    component: ProcessingComponent
+    component: ProcessingComponent,
   },
   {
     path: 'blog',
-    component: BlogComponent
+    component: BlogComponent,
   },
   {
     path: 'admin',
@@ -40,7 +41,7 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'panel',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'panel',
@@ -66,12 +67,16 @@ const routes: Routes = [
         path: 'blog',
         component: BlogPanelComponent,
       },
-    ]
-  }
+      {
+        path: 'morphologies',
+        component: MorphologyComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
