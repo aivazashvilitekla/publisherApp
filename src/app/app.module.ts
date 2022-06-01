@@ -28,6 +28,10 @@ import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserRoutingModule } from './a-user/user-routing.module';
+import { UserDashboardComponent } from './a-user/user-dashboard/user-dashboard.component';
+import { UserSidebarComponent } from './a-user/user-sidebar/user-sidebar.component';
+import { UserProfileComponent } from './a-user/user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +46,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProcessingComponent,
     BlogComponent,
     BlogPanelComponent,
-    DataComponent
+    DataComponent,
+    UserDashboardComponent,
+    UserSidebarComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +66,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     // AngularFirestore
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    UserRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

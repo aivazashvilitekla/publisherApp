@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { faUser, faLock, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
-import { MatchPassword, patternValidator, showAuthError } from 'src/app/shared/utils';
+import {
+  MatchPassword,
+  patternValidator,
+  showAuthError,
+} from 'src/app/shared/utils';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
 
@@ -19,9 +23,15 @@ export class RegisterComponent implements OnInit {
   faEye = faEye;
 
   registerForm: FormGroup | undefined;
+  registerInfo: FormGroup | undefined;
+  registerPic: FormGroup | undefined;
   submitted = false;
   passwordVisibility = false;
   confirmPasswordVisibility = false;
+  step: number = 1;
+  user: any;
+  userInfo: any;
+  userPic: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -33,9 +43,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this._initRegisterForm();
-  }
-  register() {
-    this.authService.SignUp('tekla@gmail.com', 'Tekla123');
+    this._initRegisterInfo();
+    this._initRegisterPic();
   }
   private _initRegisterForm() {
     this.registerForm = this.fb.group(
@@ -52,24 +61,57 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+  private _initRegisterInfo() {
+    this.registerInfo = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+    });
+  }
+  private _initRegisterPic() {
+    this.registerPic = this.fb.group({
+      pic: ['', Validators.required],
+      picOption: [''],
+    });
+  }
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm?.valid)
     if (this.registerForm?.valid) {
-      const user = this.registerForm.value;
+      this.user = this.registerForm.value;
+      this.step++;
+    } else {
+      this.toastrService.showErrorMessage(
+        'Not all fields in form group are valid.'
+      );
+    }
+  }
+  toStepThree() {
+    if (this.registerInfo?.valid) {
+      this.userInfo = this.registerInfo.value;
+      this.step++;
+    } else {
+      this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი.');
+    }
+  }
+  finalSave() {
+    if (this.registerInfo?.valid) {
+      this.userInfo = this.registerInfo.value;
+      const userData = {
+        firstName: this.userInfo.firstName,
+        lastName: this.userInfo.lastName,
+        registerDate: new Date().toString()
+      };
       this.loadingService.startLoading();
       this.authService
-        .SignUp(user.email, user.password)
+        .SignUp(this.user.email, this.user.password, userData)
         .pipe(finalize(() => this.loadingService.stopLoading()))
         .subscribe({
           next: () => this.router.navigate(['/']),
           error: (err) =>
             this.toastrService.showErrorMessage(showAuthError(err)),
         });
-    } else {
-      this.toastrService.showErrorMessage(
-        'Not all fields in form group are valid.'
-      );
+    }
+    else {
+      this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი.');
     }
   }
   togglePassword() {

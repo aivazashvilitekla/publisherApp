@@ -1,5 +1,5 @@
 <app-loading></app-loading>
-<section class="register">
+<section class="register" *ngIf="step==1">
   <div class="form">
     <a routerLink="/login" class="login-link">ავტორიზაცია</a>
     <div class="name">
@@ -48,8 +48,8 @@
               *ngIf="registerForm?.get('password')?.touched && registerForm?.get('password')?.errors?.['invalidPassword']"
             >
                 პაროლი უნდა იყოს მინიმუმ 8 სიმბოლო და შეიცავდეს ბლა ბლა ბლა.
-                <!-- TODO  change text-->
-              <!-- Password should have minimum 8 characters, at least 1 uppercase
+                <!-- TODO  change text
+              Password should have minimum 8 characters, at least 1 uppercase
               letter, 1 lowercase letter and 1 number. -->
             </span>
       </div>
@@ -85,3 +85,48 @@
     </div>
   </div>
 </section>
+
+
+
+<section class="fill-out-info" *ngIf="step==2">
+  <div class="logo">
+    <img src="../../../assets/images/tetri.png" alt="logo" />
+  </div>
+  <div class="cont">
+    <p class="more-info">
+      რეგისტრაციის დასასრულებლად გთხოვთ შეავსოთ ინფორმაცია.
+    </p>
+    <form *ngIf="registerInfo" [formGroup]="registerInfo">
+      <div class="container">
+        <input type="text" placeholder="სახელი" formControlName="firstName" />
+        <input type="text" placeholder="გვარი" formControlName="lastName" />
+        <button type="button" (click)="finalSave()">შემდეგი</button>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- <section class="fill-out-info-pic" *ngIf="step==3">
+  <div class="logo">
+    <img src="../../../assets/images/tetri.png" alt="logo" />
+  </div>
+  <div class="cont">
+    <p class="success">თქვენი ანგარიში <span>წარმატებით</span> შეიქმნა.</p>
+    <p class="little-more">
+      დიდი მადლობა. სულ ცოტა დარჩა.
+    </p>
+    <form *ngIf="registerPic" [formGroup]="registerPic">
+      <div class="container">
+        <h2>აირჩიე ფოტოსურათი</h2>
+        <img src="../../../assets/images/upload.png" alt="upload">
+        <input type="file" formControlName="pic" accept="image/*" />
+        <div class="checkbx">
+          <input type="checkbox" name="checkbx" formControlName="picOption"/>
+          <label for="checkbx">ფოტოს გარეშე</label>
+        </div>
+        
+        <button type="button" (click)="finalSave()">შემდეგი</button>
+      </div>
+    </form>
+  </div>
+</section> -->
+

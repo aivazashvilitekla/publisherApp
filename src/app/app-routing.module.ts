@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DownloadPageComponent } from './a-user/download-page/download-page.component';
+import { EditingPageComponent } from './a-user/editing-page/editing-page.component';
+import { NotificationsPageComponent } from './a-user/notifications-page/notifications-page.component';
+import { UserDashboardComponent } from './a-user/user-dashboard/user-dashboard.component';
+import { UserProfileComponent } from './a-user/user-profile/user-profile.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
@@ -65,6 +70,33 @@ const routes: Routes = [
       {
         path: 'blog',
         component: BlogPanelComponent,
+      },
+    ]
+  },
+  {
+    path: 'user',
+    component: UserDashboardComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'profile',
+        pathMatch: 'full'
+      },
+      {
+        path: 'profile',
+        component: UserProfileComponent,
+      },
+      {
+        path: 'download',
+        component: DownloadPageComponent,
+      },
+      {
+        path: 'editing',
+        component: EditingPageComponent,
+      },
+      {
+        path: 'notifications',
+        component: NotificationsPageComponent,
       },
     ]
   }
