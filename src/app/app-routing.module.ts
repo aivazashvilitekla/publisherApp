@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
 import { DataComponent } from './admin/data/data.component';
+import { MorphologyComponent } from './admin/morphology/morphology.component';
 import { PanelComponent } from './admin/panel/panel.component';
 import { StatisticsComponent } from './admin/statistics/statistics.component';
 import { UsersComponent } from './admin/users/users.component';
@@ -17,27 +18,42 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { FileComponent } from './pages/file/file.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ProcessingComponent } from './pages/processing/processing.component';
+import { UploadFileComponent } from './pages/upload-file/upload-file.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
+import { MainComponent } from './shell/main/main.component';
 
 const routes: Routes = [
   {
     path: '',
     // canActivate: [AnonymousGuard],
     component: HomepageComponent,
-    pathMatch: 'full'
+    // pathMatch: 'full',
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: MainComponent,
+      },
+
+      {
+        path: 'processing',
+        component: ProcessingComponent,
+      },
+      {
+        path: 'blog',
+        component: BlogComponent,
+      },
+      {
+        path: 'upload-file',
+        component: UploadFileComponent,
+      },
+    ],
   },
-  {
-    path: 'file',
-    component: FileComponent
-  },
-  {
-    path: 'processing',
-    component: ProcessingComponent
-  },
-  {
-    path: 'blog',
-    component: BlogComponent
-  },
+
   {
     path: 'admin',
     component: AdminDashboardComponent,
@@ -45,7 +61,7 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'panel',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'panel',
@@ -71,7 +87,11 @@ const routes: Routes = [
         path: 'blog',
         component: BlogPanelComponent,
       },
-    ]
+      {
+        path: 'morphologies',
+        component: MorphologyComponent,
+      },
+    ],
   },
   {
     path: 'user',
@@ -80,7 +100,7 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'profile',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'profile',
@@ -98,12 +118,12 @@ const routes: Routes = [
         path: 'notifications',
         component: NotificationsPageComponent,
       },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -32,6 +32,9 @@ import { UserRoutingModule } from './a-user/user-routing.module';
 import { UserDashboardComponent } from './a-user/user-dashboard/user-dashboard.component';
 import { UserSidebarComponent } from './a-user/user-sidebar/user-sidebar.component';
 import { UserProfileComponent } from './a-user/user-profile/user-profile.component';
+import { MorphologyComponent } from './admin/morphology/morphology.component';
+import { UploadFileComponent } from './pages/upload-file/upload-file.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,9 +50,11 @@ import { UserProfileComponent } from './a-user/user-profile/user-profile.compone
     BlogComponent,
     BlogPanelComponent,
     DataComponent,
+    MorphologyComponent,
     UserDashboardComponent,
     UserSidebarComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,

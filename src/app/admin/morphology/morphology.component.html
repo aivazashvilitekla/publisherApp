@@ -1,27 +1,21 @@
 <div class="container">
-  <h1>ბარბარიზმები</h1>
+  <h1>მორფოლოგიები</h1>
   <div class="card">
     <div class="add">
       <form
-        *ngIf="barbarismForm"
-        [formGroup]="barbarismForm"
+        *ngIf="morphologyForm"
+        [formGroup]="morphologyForm"
         (ngSubmit)="onSubmit()"
       >
         <input
           type="text"
           placeholder="სწორი ფორმა"
-          formControlName="Wrong_Word"
-        />
-        <input
-          type="text"
-          placeholder="არასწორი ფორმა"
           formControlName="Correct_Word"
         />
         <input
           type="text"
-          placeholder="აღწერა"
-          formControlName="Description"
-          *ngIf="!editingMode"
+          placeholder="არასწორი ფორმა"
+          formControlName="Wrong_Word"
         />
         <div class="buttons flex gap-2">
           <button type="submit" *ngIf="!editingMode">დამატება</button>
@@ -47,21 +41,20 @@
         </form>
       </div>
       <div class="words">
-        <div class="word-card" *ngFor="let barbarism of barbarisms$ | async">
+        <div class="word-card" *ngFor="let morphology of morphologies$ | async">
           <h2>
-            {{ barbarism.Wrong_Word }} —> {{ barbarism.Correct_Word }} <br />
-            <h3>{{ barbarism.Description }}</h3>
+            {{ morphology.Wrong_Word }} —> {{ morphology.Correct_Word }}
           </h2>
           <div class="actions">
             <fa-icon
               [icon]="faEdit"
               class="text-info pointer"
-              (click)="editMode(barbarism)"
+              (click)="editMode(morphology)"
             ></fa-icon>
             <fa-icon
               [icon]="faTrash"
               class="text-danger pointer"
-              (click)="deleteWord(barbarism.Id)"
+              (click)="deleteWord(morphology.Id)"
             ></fa-icon>
           </div>
         </div>
