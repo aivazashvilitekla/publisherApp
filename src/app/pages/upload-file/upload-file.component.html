@@ -1,38 +1,36 @@
-<section class="upload-file" *ngIf="false">
+<section class="upload-file" *ngIf="stepsVar == steps.Uploading">
   <div class="container">
     <h1>დოკუმენტის ატვირთვა</h1>
     <!-- <div class="dropzone" appDnd (fileDropped)="onFileDropped($event)">
       <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)">
       <img src="../../../assets/images/upload-png.png" alt="upload">
     </div> -->
-    <div draggable="true" ngClass="{{dragAreaClass}}">
+    <div draggable="true" ngClass="{{ dragAreaClass }}">
       <div class="col-md-12 text-center bla">
         <a href="javascript:void(0)" (click)="file.click()">
-          <img src="../../../assets/images/upload-png.png" alt="upload">
+          <img src="../../../assets/images/upload-png.png" alt="upload" />
         </a>
-        
-        
+
         <p>
-          <a href="javascript:void(0)" (click)="file.click()">
-            აირჩიე,
-          </a>
+          <a href="javascript:void(0)" (click)="file.click()"> აირჩიე, </a>
           ან ჩააგდე დოკუმენტი
         </p>
         <span>დოკუმენტი უნდა იყოს ვორდის გაფართოების (doc. docx. rtf.)</span>
-        <input type="file"
-                     #file
-                     [multiple]="false"
-                     (change)="onFileChange($event)"
-                     style="display:none" />
-          </div>
+        <input
+          type="file"
+          accept=".doc,.docx,.rtf"
+          #file
+          [multiple]="false"
+          (change)="onFileChange($event)"
+          style="display: none"
+        />
       </div>
-      <div class="error" *ngIf="error">
-        Only one file at time allow
-      </div>
+    </div>
+    <div class="error" *ngIf="error">Only one file at time allow</div>
   </div>
 </section>
 <!--  -->
-<section class="overview" *ngIf="false">
+<section class="overview" *ngIf="stepsVar == steps.Overview">
   <div class="logo">
     <div class="rec"></div>
     <h1>ჩამშვები</h1>
@@ -44,7 +42,7 @@
   </div>
 </section>
 <!--  -->
-<section id="processing-section">
+<section id="processing-section" *ngIf="stepsVar == steps.Processing">
   <div class="processing-container">
     <header>
       <div class="author">

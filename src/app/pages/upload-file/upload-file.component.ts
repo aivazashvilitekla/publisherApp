@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Steps } from 'src/app/models/models';
+import { ApiService } from 'src/app/services/api.service';
 interface Work {
   id: number;
   img: string;
@@ -71,35 +74,39 @@ const data = [
     ],
   },
 ];
+
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
-  styleUrls: ['./upload-file.component.scss']
+  styleUrls: ['./upload-file.component.scss'],
 })
 export class UploadFileComponent implements OnInit {
   selectedWork: Work | undefined;
   loading = true;
+  stepsVar: Steps = Steps.Uploading;
+  steps = Steps;
+  uploadedFile: any;
 
   pickWork() {
     // const randomAuthorId = Math.floor(Math.random() * (100 - 1) + 1);
     // const randomWorkId = Math.floor(Math.random() * (200 - 101) + 101);
     const randomAuthorId = 1;
     const randomWorkId = 101;
-    const foundAuthor: any = data.find(item => item.id === randomAuthorId)
-    const foundWriting: any = foundAuthor.writing.find((item: any) => item.id === randomWorkId);
+    const foundAuthor: any = data.find((item) => item.id === randomAuthorId);
+    const foundWriting: any = foundAuthor.writing.find(
+      (item: any) => item.id === randomWorkId
+    );
     this.selectedWork = {
       ...foundAuthor,
-      writing: foundWriting
-    }
-    
+      writing: foundWriting,
+    };
   }
 
-  constructor() { }
+  constructor(private apiService: ApiService, private http: HttpClient) {}
 
   ngOnInit() {
     this.pickWork();
-    console.log(this.selectedWork);
-    this.dragAreaClass = "dragarea";
+    this.dragAreaClass = 'dragarea';
   }
   error!: string;
   dragAreaClass!: string;
@@ -109,34 +116,47 @@ export class UploadFileComponent implements OnInit {
     this.saveFiles(files);
   }
 
-  saveFiles(files: FileList) {
-
-    if (files.length > 1) this.error = "Only one file at time allow";
+  async saveFiles(files: FileList) {
+    if (files.length > 1) this.error = 'Only one file at time allow';
     else {
-      this.error = "";
-      console.log(files[0].size,files[0].name,files[0].type);
+      this.error = '';
       this.draggedFiles = files;
-      console.log(files);
+      this.uploadedFile = files;
+      // this.apiService.uploadFile('https://localhost:44371/api/TakeDoc', files)
+      // const filePicked = files[0];
+      // const reader = new FileReader();
+      // reader.onload = () => {
+      //   console.log(reader.result);
+      // };
+      // reader.readAsText(filePicked, 'UTF-8');
+      var reader = new FileReader();
+
+      reader.onload = function () {
+        console.log(reader.result);
+      };
+
+      reader.readAsText(files[0], 'UTF-8');
+      // this.stepsVar = Steps.Overview;
     }
   }
-  @HostListener("dragover", ["$event"]) onDragOver(event: any) {
-    this.dragAreaClass = "droparea";
+  @HostListener('dragover', ['$event']) onDragOver(event: any) {
+    this.dragAreaClass = 'droparea';
     event.preventDefault();
   }
-  @HostListener("dragenter", ["$event"]) onDragEnter(event: any) {
-    this.dragAreaClass = "droparea";
+  @HostListener('dragenter', ['$event']) onDragEnter(event: any) {
+    this.dragAreaClass = 'droparea';
     event.preventDefault();
   }
-  @HostListener("dragend", ["$event"]) onDragEnd(event: any) {
-    this.dragAreaClass = "dragarea";
+  @HostListener('dragend', ['$event']) onDragEnd(event: any) {
+    this.dragAreaClass = 'dragarea';
     event.preventDefault();
   }
-  @HostListener("dragleave", ["$event"]) onDragLeave(event: any) {
-    this.dragAreaClass = "dragarea";
+  @HostListener('dragleave', ['$event']) onDragLeave(event: any) {
+    this.dragAreaClass = 'dragarea';
     event.preventDefault();
   }
-  @HostListener("drop", ["$event"]) onDrop(event: any) {
-    this.dragAreaClass = "dragarea";
+  @HostListener('drop', ['$event']) onDrop(event: any) {
+    this.dragAreaClass = 'dragarea';
     event.preventDefault();
     event.stopPropagation();
     if (event.dataTransfer.files) {
@@ -144,5 +164,4 @@ export class UploadFileComponent implements OnInit {
       this.saveFiles(files);
     }
   }
-
 }

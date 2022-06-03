@@ -8,7 +8,8 @@ export class ApiService {
 
   api = 'localhost:44371/api';
 
-  // localhost:44371/api/TakeDoc [post]
+  // https://localhost:44371/api/TakeDoc [post]
+  
   uploadFile(api: string, body: any, obj?: any){
     return this.http.post(api, body,obj)
   }
