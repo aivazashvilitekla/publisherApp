@@ -15,6 +15,7 @@ import { StatisticsComponent } from './admin/statistics/statistics.component';
 import { UsersComponent } from './admin/users/users.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { BlogComponent } from './pages/blog/blog.component';
+import { EditorComponent } from './pages/editor/editor.component';
 import { FileComponent } from './pages/file/file.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { ProcessingComponent } from './pages/processing/processing.component';
@@ -50,6 +51,10 @@ const routes: Routes = [
       {
         path: 'upload-file',
         component: UploadFileComponent,
+      },
+      {
+        path: 'editor',
+        component: EditorComponent,
       },
     ],
   },

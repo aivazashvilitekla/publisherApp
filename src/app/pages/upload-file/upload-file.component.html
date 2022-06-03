@@ -1,4 +1,4 @@
-<section class="upload-file">
+<section class="upload-file" *ngIf="false">
   <div class="container">
     <h1>დოკუმენტის ატვირთვა</h1>
     <!-- <div class="dropzone" appDnd (fileDropped)="onFileDropped($event)">
@@ -29,5 +29,86 @@
       <div class="error" *ngIf="error">
         Only one file at time allow
       </div>
+  </div>
+</section>
+<!--  -->
+<section class="overview" *ngIf="false">
+  <div class="logo">
+    <div class="rec"></div>
+    <h1>ჩამშვები</h1>
+  </div>
+  <div class="cont">
+    <h1>გადახედე დოკუმენტს</h1>
+    <div class="text-cont"></div>
+    <p>შემდეგი</p>
+  </div>
+</section>
+<!--  -->
+<section id="processing-section">
+  <div class="processing-container">
+    <header>
+      <div class="author">
+        <div class="img">
+          <img
+            src="../../../assets/images/authors/galaktion.jpg"
+            alt="author"
+          />
+        </div>
+        <div class="name">
+          <h2>{{ selectedWork?.fullName }}</h2>
+          <h4>{{ selectedWork?.titleName }}</h4>
+        </div>
+        <div class="birth-date">
+          <span>{{ selectedWork?.born }}</span
+          ><br />
+          <span class="second">—{{ selectedWork?.died }}</span>
+        </div>
+        <div class="text-info">
+          <h2>{{ selectedWork?.writing?.title }}</h2>
+          <span>{{ selectedWork?.writing?.year }}</span>
+        </div>
+      </div>
+      <div class="processing-info">
+        <div class="in-progress-text">
+          <span>მზადდება</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="work">
+        <div class="work-container">
+          <pre class="white">{{ selectedWork?.writing?.text }}</pre>
+        </div>
+      </div>
+      <div class="waiting">
+        <div class="while-processing">
+          <p>
+            ვიდრე დოკუმენტი გამზადდება,<br />
+            იკითხე ქართული ლიტერატურა
+          </p>
+        </div>
+        <div class="while-loading" *ngIf="loading">
+          <div class="loading">
+            <div class="lds-default">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div class="done" *ngIf="!loading">
+          <button>გადმოწერა</button>
+        </div>
+      </div>
+    </main>
   </div>
 </section>

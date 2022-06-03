@@ -180,3 +180,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       font-style: normal;
       font-display: swap;
     }
+    @font-face {
+      font-family: "gilroy";
+      src: url("./assets/fonts/gilroy/GilroyGEOHeavy.woff2") format("woff2"),
+        url("./assets/fonts/gilroy/GilroyGEOHeavy.woff") format("woff"),
+        url("./assets/fonts/gilroy/GilroyGEOHeavy.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }

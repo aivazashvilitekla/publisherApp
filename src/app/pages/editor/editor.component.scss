@@ -1,0 +1,145 @@
+.editor{
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 3rem;
+    
+    h1{
+        font-family: 'gilroy';
+        font-size: 50px;
+    }
+    .editor-container{
+        border: 2px solid #5d5a3f;
+        border-radius: 10px;
+        width: 80%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        // grid-template-rows: 80px auto 80px;
+        header, footer{
+            height: 80px;
+            width: 100%;
+            display: flex;
+            
+            align-items: center;
+            padding: 0 2rem;
+            &>div{
+                width: 33.3%;
+                display: flex;
+                justify-content: center;
+            }
+            button{
+                font-family: 'gilroy';
+                background: #a2a2a2;
+                border-radius: 50px;
+                padding: 1rem 3rem;
+                outline: none;
+                border: none;
+                color: white;
+            }
+            label{
+                font-family: 'gilroy';
+            }
+        }
+        header{
+            border-bottom: 2px solid #5d5a3f;
+            button{
+                background: #00ed86;
+            }
+            .auto{
+                display: flex;
+                justify-content: flex-end;
+                gap: 0.3rem;
+            }
+        }
+        footer{
+            border-top: 2px solid #5d5a3f;
+            .options{
+                display: flex;
+                gap: 2rem;
+                &>div{
+                    display: flex;
+                    gap: 0.3rem;
+                    input[type=checkbox]{
+                        background: black;
+                        border: 1px solid gray;
+                    }
+                }             
+            }
+            .download{
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .editor-main{
+            display: flex;
+            gap: 3rem;
+            padding: 2rem;
+            ::-webkit-scrollbar {
+                width: 5px;
+              }
+              
+              /* Track */
+              ::-webkit-scrollbar-track {
+                background: none;
+                margin-block: 25px;
+              }
+               
+              /* Handle */
+              ::-webkit-scrollbar-thumb {
+                background: rgb(0, 255, 208);
+                border-radius: 50px;
+              }
+            .text-container{
+                width: 80%;
+                overflow-y: scroll;
+            }
+            .corrections{
+                background: #5d5a3f;
+                border-radius: 30px;
+                width: 20%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                header{
+                    width: 100%;
+                    height: 12%;
+                    border-bottom: 2px solid black;
+                    span{
+                        width: inherit;
+                        text-align: center;
+                        color: white;
+                        font-family: 'gilroy';
+                    }
+                }
+                .words-container{
+                    height: 80%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 1rem 2rem;
+                    overflow-y: scroll;
+                    height: 390px;
+                    gap: 1rem;
+                    
+                    .word{
+                        width: 100%;
+                        height: 50px;
+                        background: #2c2b22;
+                        border-radius: 50px;
+                        p{
+                            text-align: center;
+                            width: 100%;
+                            padding: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
