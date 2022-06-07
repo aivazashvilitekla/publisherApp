@@ -149,8 +149,8 @@ export class UploadFileComponent implements OnInit {
     const file$ = this.apiService.hypDoc(
       `https://localhost:44371/api/HypDoc/${this.filename}`
     );
-    file$.subscribe((res) => {
-      console.log(res);
+    file$.subscribe((res: any) => {
+      this.filename = res.FileName;
       this.doneProcessing = true;
     });
   }
@@ -163,7 +163,7 @@ export class UploadFileComponent implements OnInit {
   save() {
     // localhost: 44371 / api / SaveWork / { fileName } ? pdf = true / false(default false)
     this.http
-      .get(`https://localhost:44371/api/SaveWork/${this.filename}?pdf=true`,
+      .get(`https://localhost:44371/api/SaveWork/${this.filename}`,
       {
         responseType: 'arraybuffer'
       })
@@ -176,22 +176,22 @@ export class UploadFileComponent implements OnInit {
   //     .map(res =>  res)
   // }
   private getZipFile(data: any) {
+    const blob = new Blob([data], { type: 'application/x-zip' });
+
+    const a: any = document.createElement('a');
+    document.body.appendChild(a);
+
+    a.style = 'display: none';    
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = `${this.filename}`;
+    a.click();
+    window.URL.revokeObjectURL(url);
     // const blob = new Blob([data], {
     //   type: 'application/zip'
     // });
     // const url = window.URL.createObjectURL(blob);
     // window.open(url);
-    const blob = new Blob([data], { type: 'application/zip' });
-
-    // const a: any = document.createElement('a');
-    // document.body.appendChild(a);
-
-    // a.style = 'display: none';    
-    const url = window.URL.createObjectURL(blob);
-    // a.href = url;
-    // a.download = test.zip;
-    // a.click();
-    window.open(url);
 
   }
   @HostListener('dragover', ['$event']) onDragOver(event: any) {
