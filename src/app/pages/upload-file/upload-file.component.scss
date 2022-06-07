@@ -135,9 +135,9 @@
 }
 
 #processing-section{
-    margin: 0 auto;
+    margin: 3rem auto;
     background-image: url(../../../assets/images/processing-bg.png);
-    width: 99vw;
+    width: 90vw;
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -229,13 +229,15 @@
         }
         main{
             display: grid;
-            grid-template-columns: 3fr 2fr;
+            grid-template-columns: 2fr 1fr;
             gap: 1rem;
             .work{
                 padding: 0 3rem;
+                border-right: 1px solid white;
                 .work-container{
                     border-left: 1px solid white;
                     border-right: 1px solid white;
+                    padding-right: 3rem;
                     height: 480px;
                     overflow-y: scroll;
                     text-align: center;
@@ -250,7 +252,8 @@
                 }
             }
             .waiting{
-                border-left: 1px solid white;
+                // border-left: 1px solid white;
+                min-width: 420px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

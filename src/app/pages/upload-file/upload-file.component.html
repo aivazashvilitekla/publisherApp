@@ -68,7 +68,8 @@
       </div>
       <div class="processing-info">
         <div class="in-progress-text">
-          <span>მზადდება</span>
+          <span *ngIf="!fileProcessing" (click)="startProcessing()">დაწყება</span>
+          <span *ngIf="fileProcessing">მზადდება</span>
         </div>
       </div>
     </header>
@@ -103,8 +104,8 @@
             </div>
           </div>
         </div>
-        <div class="done" *ngIf="!loading">
-          <button>გადმოწერა</button>
+        <div class="done" *ngIf="doneProcessing">
+          <button (click)="save()">გადმოწერა</button>
         </div>
       </div>
     </main>

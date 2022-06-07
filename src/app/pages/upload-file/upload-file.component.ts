@@ -82,10 +82,13 @@ const data = [
 })
 export class UploadFileComponent implements OnInit {
   selectedWork: Work | undefined;
-  loading = true;
+  loading = false;
   stepsVar: Steps = Steps.Uploading;
   steps = Steps;
   uploadedFile: any;
+  filename: string = '';
+  fileProcessing = false;
+  doneProcessing = false;
 
   pickWork() {
     // const randomAuthorId = Math.floor(Math.random() * (100 - 1) + 1);
@@ -116,28 +119,80 @@ export class UploadFileComponent implements OnInit {
     this.saveFiles(files);
   }
 
-  async saveFiles(files: FileList) {
+  saveFiles(files: FileList) {
     if (files.length > 1) this.error = 'Only one file at time allow';
     else {
       this.error = '';
       this.draggedFiles = files;
-      this.uploadedFile = files;
-      // this.apiService.uploadFile('https://localhost:44371/api/TakeDoc', files)
-      // const filePicked = files[0];
-      // const reader = new FileReader();
-      // reader.onload = () => {
-      //   console.log(reader.result);
-      // };
-      // reader.readAsText(filePicked, 'UTF-8');
-      var reader = new FileReader();
 
-      reader.onload = function () {
-        console.log(reader.result);
-      };
+      const file = files[0];
+      this.filename = files[0].name;
 
-      reader.readAsText(files[0], 'UTF-8');
+      const formData = new FormData();
+
+      formData.append('thumbnail', file);
+      const upload$ = this.apiService.uploadFile(
+        'https://localhost:44371/api/TakeDoc',
+        formData
+      );
+
+      upload$.subscribe((res) => {
+        console.log(res);
+        this.stepsVar = Steps.Processing;
+      });
       // this.stepsVar = Steps.Overview;
     }
+  }
+  startProcessing() {
+    // localhost:44371/api/HypDoc/{fileName} [GET]
+    this.fileProcessing = true;
+    const file$ = this.apiService.hypDoc(
+      `https://localhost:44371/api/HypDoc/${this.filename}`
+    );
+    file$.subscribe((res) => {
+      console.log(res);
+      this.doneProcessing = true;
+    });
+  }
+  test2() {
+    const file$ = this.http.get(
+      `https://localhost:44371/api/GetDocPage/${this.filename}`
+    );
+    file$.subscribe(console.log);
+  }
+  save() {
+    // localhost: 44371 / api / SaveWork / { fileName } ? pdf = true / false(default false)
+    this.http
+      .get(`https://localhost:44371/api/SaveWork/${this.filename}?pdf=true`,
+      {
+        responseType: 'arraybuffer'
+      })
+      .subscribe(data => this.getZipFile(data));
+    // file$.subscribe(console.log);
+  }
+  // downloadfile(filePath: string) {
+  //   return this.http
+  //     .get( URL_API_REST + 'download?filePath=' + filePath, {responseType: ResponseContentType.ArrayBuffer})
+  //     .map(res =>  res)
+  // }
+  private getZipFile(data: any) {
+    // const blob = new Blob([data], {
+    //   type: 'application/zip'
+    // });
+    // const url = window.URL.createObjectURL(blob);
+    // window.open(url);
+    const blob = new Blob([data], { type: 'application/zip' });
+
+    // const a: any = document.createElement('a');
+    // document.body.appendChild(a);
+
+    // a.style = 'display: none';    
+    const url = window.URL.createObjectURL(blob);
+    // a.href = url;
+    // a.download = test.zip;
+    // a.click();
+    window.open(url);
+
   }
   @HostListener('dragover', ['$event']) onDragOver(event: any) {
     this.dragAreaClass = 'droparea';
