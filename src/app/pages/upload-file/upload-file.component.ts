@@ -19,15 +19,16 @@ export class UploadFileComponent implements OnInit {
   doneProcessing = false;
 
   pickWork() {
+    // TODO change max number
     const randomAuthorId = Math.floor(Math.random() * (3 - 1) + 1);
-    
+
     // const randomAuthorId = 1;
     // const randomWorkId = 101;
     const foundAuthor: any = data.find((item) => item.id === randomAuthorId);
-    const randomWorkId = Math.floor(Math.random() * (foundAuthor.writing.length));
-    console.log(randomWorkId)
+    const randomWorkId = Math.floor(Math.random() * foundAuthor.writing.length);
+    console.log(randomWorkId);
 
-    const foundWriting: any = foundAuthor.writing[randomWorkId]
+    const foundWriting: any = foundAuthor.writing[randomWorkId];
     this.selectedWork = {
       ...foundAuthor,
       writing: foundWriting,
@@ -67,7 +68,12 @@ export class UploadFileComponent implements OnInit {
 
       upload$.subscribe((res) => {
         console.log(res);
-        this.stepsVar = Steps.Processing;
+        this.stepsVar = Steps.Overview;
+        this.http
+          .get(`https://localhost:44371/api/GetDocPages/${this.filename}`, {
+            responseType: 'arraybuffer',
+          })
+          .subscribe((data) => this.getZipFile(data, 'application/zip'));
       });
       // this.stepsVar = Steps.Overview;
     }
@@ -84,12 +90,12 @@ export class UploadFileComponent implements OnInit {
       this.doneProcessing = true;
     });
   }
-  test2() {
-    const file$ = this.http.get(
-      `https://localhost:44371/api/GetDocPage/${this.filename}`
-    );
-    file$.subscribe(console.log);
-  }
+  // test2() {
+  //   const file$ = this.http.get(
+  //     `https://localhost:44371/api/GetDocPage/${this.filename}`
+  //   );
+  //   file$.subscribe(console.log);
+  // }
   save() {
     // localhost: 44371 / api / SaveWork / { fileName } ? pdf = true / false(default false)
     this.http
@@ -122,7 +128,13 @@ export class UploadFileComponent implements OnInit {
     a.href = url;
     if (!type) {
       a.download = `${this.filename}`;
-    } else a.download = `${this.filename.split('.')[0]}.pdf`;
+    } else {
+      if (type == 'application/pdf') {
+        a.download = `${this.filename.split('.')[0]}.pdf`
+      } else {
+        a.download = `${this.filename.split('.')[0]}.zip`
+      }
+    };
     a.click();
     window.URL.revokeObjectURL(url);
     // const blob = new Blob([data], {

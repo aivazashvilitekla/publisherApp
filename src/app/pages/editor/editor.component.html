@@ -4,7 +4,7 @@
     <header>
       <div class="bla"></div>
       <div class="check">
-        <button>შეამოწმე</button>
+        <button (click)="checkText()">შეამოწმე</button>
       </div>
       <div class="auto">
         <input type="checkbox" name="" id="auto" />
@@ -12,7 +12,11 @@
       </div>
     </header>
     <main class="editor-main">
-      <div class="text-container"></div>
+      <div class="text-container">
+        <form *ngIf="editorForm" [formGroup]="editorForm">
+          <angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor>
+        </form>
+      </div>
       <div class="corrections">
         <header>
           <span>შედეგები:</span>

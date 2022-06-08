@@ -34,6 +34,8 @@ import { UserSidebarComponent } from './a-user/user-sidebar/user-sidebar.compone
 import { UserProfileComponent } from './a-user/user-profile/user-profile.component';
 import { MorphologyComponent } from './admin/morphology/morphology.component';
 import { UploadFileComponent } from './pages/upload-file/upload-file.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { EditorComponent } from './pages/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { UploadFileComponent } from './pages/upload-file/upload-file.component';
     UserDashboardComponent,
     UserSidebarComponent,
     UserProfileComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import { UploadFileComponent } from './pages/upload-file/upload-file.component';
     // AngularFirestore
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    UserRoutingModule
+    UserRoutingModule,
+    HttpClientModule, AngularEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent],
