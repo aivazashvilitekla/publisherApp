@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       this.auth.SignIn(user.email, user.password).subscribe({
         next: () => {
           this.loadingService.stopLoading();
+          localStorage.setItem('loggedIn', 'true');
           this.router.navigate(['/']);
         },
         error: (error) => {

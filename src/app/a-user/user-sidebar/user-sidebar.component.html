@@ -1,7 +1,7 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar">
   <div class="content">
     <div class="logo-container">
-      <a href="/user" class="d-flex align-items-center text-white logo-link">
+      <a href="/" class="d-flex align-items-center text-white logo-link">
         <span class=" logo">ჩამშვებ<span>ი</span></span>
       </a>
     </div>
@@ -12,15 +12,8 @@
         <li routerLink="download" routerLinkActive="active">გადმოწერა</li>
         <li routerLink="editing" routerLinkActive="active">რედაქტირება</li>
         <li routerLink="notifications" routerLinkActive="active">შეტყობინებები</li>
-        <li >გასვლა</li>
+        <li (click)="signOut()">გასვლა</li>
       </ul>
     </nav>
-  </div>
-  <hr />
-  <div class="user">
-    <div class="img-div">
-      <img src="../../../assets/images/bg.png" alt="user" />
-    </div>
-    <strong>username</strong>
   </div>
 </div>

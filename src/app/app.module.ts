@@ -72,7 +72,7 @@ import { EditorComponent } from './pages/editor/editor.component';
     ReactiveFormsModule,
 
     // AngularFirestore
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     UserRoutingModule,
     HttpClientModule, AngularEditorModule

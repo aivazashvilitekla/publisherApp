@@ -7,12 +7,12 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   {
     path: 'login',
-    // canActivate: [AnonymousGuard],
+    canActivate: [AnonymousGuard],
     component: LoginComponent,
   },
   {
     path: 'register',
-    // canActivate: [AnonymousGuard],
+    canActivate: [AnonymousGuard],
     component: RegisterComponent,
   },
   {

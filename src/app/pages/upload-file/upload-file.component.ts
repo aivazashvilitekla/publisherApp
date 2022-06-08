@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { data, Steps, Work } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';
-
+import * as fs from 'unzipper';
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
@@ -69,14 +69,18 @@ export class UploadFileComponent implements OnInit {
       upload$.subscribe((res) => {
         console.log(res);
         this.stepsVar = Steps.Overview;
-        this.http
-          .get(`https://localhost:44371/api/GetDocPages/${this.filename}`, {
-            responseType: 'arraybuffer',
-          })
-          .subscribe((data) => this.getZipFile(data, 'application/zip'));
+        this.getPages();
       });
       // this.stepsVar = Steps.Overview;
     }
+  }
+  getPages() {
+    
+    this.http
+      .get(`https://localhost:44371/api/GetDocPages/${this.filename}`, {
+        responseType: 'arraybuffer',
+      })
+      .subscribe();
   }
   startProcessing() {
     // localhost:44371/api/HypDoc/{fileName} [GET]
@@ -90,20 +94,12 @@ export class UploadFileComponent implements OnInit {
       this.doneProcessing = true;
     });
   }
-  // test2() {
-  //   const file$ = this.http.get(
-  //     `https://localhost:44371/api/GetDocPage/${this.filename}`
-  //   );
-  //   file$.subscribe(console.log);
-  // }
   save() {
-    // localhost: 44371 / api / SaveWork / { fileName } ? pdf = true / false(default false)
     this.http
       .get(`https://localhost:44371/api/SaveWork/${this.filename}`, {
         responseType: 'arraybuffer',
       })
       .subscribe((data) => this.getZipFile(data));
-    // file$.subscribe(console.log);
   }
   saveAsPDF() {
     this.http
@@ -112,11 +108,6 @@ export class UploadFileComponent implements OnInit {
       })
       .subscribe((data) => this.getZipFile(data, 'application/pdf'));
   }
-  // downloadfile(filePath: string) {
-  //   return this.http
-  //     .get( URL_API_REST + 'download?filePath=' + filePath, {responseType: ResponseContentType.ArrayBuffer})
-  //     .map(res =>  res)
-  // }
   private getZipFile(data: any, type?: string) {
     const blob = new Blob([data], { type: type ? type : 'application/x-zip' });
 
@@ -130,11 +121,11 @@ export class UploadFileComponent implements OnInit {
       a.download = `${this.filename}`;
     } else {
       if (type == 'application/pdf') {
-        a.download = `${this.filename.split('.')[0]}.pdf`
+        a.download = `${this.filename.split('.')[0]}.pdf`;
       } else {
-        a.download = `${this.filename.split('.')[0]}.zip`
+        a.download = `${this.filename.split('.')[0]}.zip`;
       }
-    };
+    }
     a.click();
     window.URL.revokeObjectURL(url);
     // const blob = new Blob([data], {

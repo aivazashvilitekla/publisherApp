@@ -36,7 +36,8 @@ export class AuthenticationService {
     const firstName = userObj.firstName;
     const lastName = userObj.lastName;
     const registerDate = userObj.registerDate;
-    return { firstName, lastName, registerDate };
+    const email = userObj.email;
+    return { firstName, lastName, registerDate, email };
   }
   // Sign out
   SignOut() {

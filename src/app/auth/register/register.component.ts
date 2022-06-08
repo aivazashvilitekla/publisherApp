@@ -98,19 +98,22 @@ export class RegisterComponent implements OnInit {
       const userData = {
         firstName: this.userInfo.firstName,
         lastName: this.userInfo.lastName,
-        registerDate: new Date().toString()
+        registerDate: new Date().toString(),
+        email: this.user.email,
       };
       this.loadingService.startLoading();
       this.authService
         .SignUp(this.user.email, this.user.password, userData)
         .pipe(finalize(() => this.loadingService.stopLoading()))
         .subscribe({
-          next: () => this.router.navigate(['/']),
+          next: () => {
+            localStorage.setItem('loggedIn', 'true');
+            this.router.navigate(['/']);
+          },
           error: (err) =>
             this.toastrService.showErrorMessage(showAuthError(err)),
         });
-    }
-    else {
+    } else {
       this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი.');
     }
   }

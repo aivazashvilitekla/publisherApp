@@ -13,7 +13,9 @@ import { MorphologyComponent } from './admin/morphology/morphology.component';
 import { PanelComponent } from './admin/panel/panel.component';
 import { StatisticsComponent } from './admin/statistics/statistics.component';
 import { UsersComponent } from './admin/users/users.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AnonymousGuard } from './guards/anonymous.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { BlogComponent } from './pages/blog/blog.component';
 import { EditorComponent } from './pages/editor/editor.component';
 import { FileComponent } from './pages/file/file.component';
@@ -62,6 +64,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    canActivate: [AdminGuard],
     children: [
       {
         path: '',
@@ -101,6 +104,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserDashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

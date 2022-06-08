@@ -12,9 +12,12 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
-    if (this.authService.currentUser) {
+    console.log(localStorage.getItem('loggedIn'))
+    if (localStorage.getItem('loggedIn')) {
       this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
     }
-    console.log(this.authService.currentUser);
+    // console.log(this.authService.currentUser);
   }
 }

@@ -6,13 +6,13 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AnonymousGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(private auth: AuthenticationService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,13 +23,14 @@ export class AnonymousGuard implements CanActivate {
     | boolean
     | UrlTree {
     return this.auth.currentUserState.pipe(
-        map((user) => {
-          if (user) {
-            this.router.navigate(['/user']);
-            return false;
-          }
+      map((user) => {
+        const email = this.auth.getUserInfo().email;
+        if (user && email === 'admin@gmail.com') {
           return true;
-        })
-      );
+        }
+        this.router.navigate(['/home']);
+        return false;
+      })
+    );
   }
 }
