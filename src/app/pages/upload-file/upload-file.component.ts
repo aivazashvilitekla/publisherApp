@@ -1,79 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Steps } from 'src/app/models/models';
+import { data, Steps, Work } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';
-interface Work {
-  id: number;
-  img: string;
-  fullName: string;
-  born: string;
-  died: string;
-  titleName: string;
-  writing: Writing;
-}
-interface Writing {
-  id: number;
-  title: string;
-  year: string;
-  text: string;
-}
-const data = [
-  {
-    id: 1,
-    img: '../../../assets/images/authors/galaktion.jpg',
-    fullName: 'გალაკტიონ ტაბიძე',
-    born: 'დ. 17 ნოემბერი, 1892',
-    died: 'მ. 17 მარტი, 1959',
-    titleName: 'პოეტი',
-    writing: [
-      {
-        id: 101,
-        title: 'ლურჯა ცხენები',
-        year: '1915წ.',
-        text: `
-        როგორც ნისლის ნამქერი, ჩამავალ მზით ნაფერი,
-        ელვარებდა ნაპირი სამუდამო მხარეში!
-        არ სჩანდა შენაპირი, ვერ ვნახე ვერაფერი,
-        ცივ და მიუსაფარი მდუმარების გარეშე.
-        
-        მდუმარების გარეშე და სიცივის თარეშში,
-        სამუდამო მხარეში მხოლოდ სიმწუხარეა!
-        ცეცხლი არ კრთის თვალებში, წევხარ ცივ სამარეში,
-        წევხარ ცივ სამარეში და არც სულს უხარია.
-        
-        შეშლილი სახეების ჩონჩხიანი ტყეებით
-        უსულდგმულო დღეები რბიან, მიიჩქარიან!
-        სიზმარიან ჩვენებით - ჩემი ლურჯა ცხენებით
-        ჩემთან მოესვენებით! ყველანი აქ არიან!
-        
-        იჩქარიან წამები, მე კი არ მენანება:
-        ცრემლით არ ინამება სამუდამო ბალიში;
-        გაქრა ვნება-წამება - როგორც ღამის ზმანება,
-        ვით სულის ხმოვანება ლოცვის სიმხურვალეში.
-        
-        ვით ცეცხლის ხეტიალი, როგორც ბედის ტრიალი,
-        ჩქარი გრგვინვა-გრიალით ქრიან ლურჯა ცხენები!
-        ყვავილნი არ არიან, არც შვება-სიზმარია!
-        ეხლა კი სამარეა შენი განსასვენები!
-        
-        რომელი სცნობს შენს სახეს, ან ვინ იტყვის შენს სახელს?
-        ვინ გაიგებს შენს ძახილს, ძახილს ვინ დაიჯერებს?
-        ვერავინ განუგეშებს საოცრების უბეში,
-        სძინავთ ბნელ ხვეულებში გამოუცნობ ქიმერებს!
-        
-        მხოლოდ შუქთა კამარა ვერაფერმა დაფარა:
-        მშრალ რიცხვების ამარა უდაბნოში ღელდება!
-        შეშლილი სახეების ჩონჩხიანი ტყეებით
-        უსულდგმულო დღეები ჩნდება და ქვესკნელდება.
-        
-        მხოლოდ ნისლის თარეშში, სამუდამო მხარეში,
-        ზევით თუ სამარეში, წყევლით შენაჩვენები,
-        როგორც ზღვის ხეტიალი, როგორც ბედის ტრიალი,
-        ჩქარი გრგვინვა-გრიალით ქრიან ლურჯა ცხენები!`,
-      },
-    ],
-  },
-];
 
 @Component({
   selector: 'app-upload-file',
@@ -91,14 +19,15 @@ export class UploadFileComponent implements OnInit {
   doneProcessing = false;
 
   pickWork() {
-    // const randomAuthorId = Math.floor(Math.random() * (100 - 1) + 1);
-    // const randomWorkId = Math.floor(Math.random() * (200 - 101) + 101);
-    const randomAuthorId = 1;
-    const randomWorkId = 101;
+    const randomAuthorId = Math.floor(Math.random() * (3 - 1) + 1);
+    
+    // const randomAuthorId = 1;
+    // const randomWorkId = 101;
     const foundAuthor: any = data.find((item) => item.id === randomAuthorId);
-    const foundWriting: any = foundAuthor.writing.find(
-      (item: any) => item.id === randomWorkId
-    );
+    const randomWorkId = Math.floor(Math.random() * (foundAuthor.writing.length));
+    console.log(randomWorkId)
+
+    const foundWriting: any = foundAuthor.writing[randomWorkId]
     this.selectedWork = {
       ...foundAuthor,
       writing: foundWriting,
@@ -151,6 +80,7 @@ export class UploadFileComponent implements OnInit {
     );
     file$.subscribe((res: any) => {
       this.filename = res.FileName;
+      this.fileProcessing = false;
       this.doneProcessing = true;
     });
   }
@@ -163,28 +93,36 @@ export class UploadFileComponent implements OnInit {
   save() {
     // localhost: 44371 / api / SaveWork / { fileName } ? pdf = true / false(default false)
     this.http
-      .get(`https://localhost:44371/api/SaveWork/${this.filename}`,
-      {
-        responseType: 'arraybuffer'
+      .get(`https://localhost:44371/api/SaveWork/${this.filename}`, {
+        responseType: 'arraybuffer',
       })
-      .subscribe(data => this.getZipFile(data));
+      .subscribe((data) => this.getZipFile(data));
     // file$.subscribe(console.log);
+  }
+  saveAsPDF() {
+    this.http
+      .get(`https://localhost:44371/api/SaveWork/${this.filename}?pdf=true`, {
+        responseType: 'arraybuffer',
+      })
+      .subscribe((data) => this.getZipFile(data, 'application/pdf'));
   }
   // downloadfile(filePath: string) {
   //   return this.http
   //     .get( URL_API_REST + 'download?filePath=' + filePath, {responseType: ResponseContentType.ArrayBuffer})
   //     .map(res =>  res)
   // }
-  private getZipFile(data: any) {
-    const blob = new Blob([data], { type: 'application/x-zip' });
+  private getZipFile(data: any, type?: string) {
+    const blob = new Blob([data], { type: type ? type : 'application/x-zip' });
 
     const a: any = document.createElement('a');
     document.body.appendChild(a);
 
-    a.style = 'display: none';    
+    a.style = 'display: none';
     const url = window.URL.createObjectURL(blob);
     a.href = url;
-    a.download = `${this.filename}`;
+    if (!type) {
+      a.download = `${this.filename}`;
+    } else a.download = `${this.filename.split('.')[0]}.pdf`;
     a.click();
     window.URL.revokeObjectURL(url);
     // const blob = new Blob([data], {
@@ -192,7 +130,6 @@ export class UploadFileComponent implements OnInit {
     // });
     // const url = window.URL.createObjectURL(blob);
     // window.open(url);
-
   }
   @HostListener('dragover', ['$event']) onDragOver(event: any) {
     this.dragAreaClass = 'droparea';

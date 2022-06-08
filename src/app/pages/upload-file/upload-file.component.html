@@ -48,7 +48,7 @@
       <div class="author">
         <div class="img">
           <img
-            src="../../../assets/images/authors/galaktion.jpg"
+            src="{{selectedWork?.img}}"
             alt="author"
           />
         </div>
@@ -68,7 +68,7 @@
       </div>
       <div class="processing-info">
         <div class="in-progress-text">
-          <span *ngIf="!fileProcessing" (click)="startProcessing()">დაწყება</span>
+          <span *ngIf="!fileProcessing && !doneProcessing" (click)="startProcessing()">დაწყება</span>
           <span *ngIf="fileProcessing">მზადდება</span>
         </div>
       </div>
@@ -86,7 +86,7 @@
             იკითხე ქართული ლიტერატურა
           </p>
         </div>
-        <div class="while-loading" *ngIf="loading">
+        <div class="while-loading" *ngIf="fileProcessing">
           <div class="loading">
             <div class="lds-default">
               <div></div>
@@ -106,6 +106,7 @@
         </div>
         <div class="done" *ngIf="doneProcessing">
           <button (click)="save()">გადმოწერა</button>
+          <button (click)="saveAsPDF()">გადმოწერა პდფ ფორმატით</button>
         </div>
       </div>
     </main>

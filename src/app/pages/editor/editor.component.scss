@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     color: white;
-    gap: 3rem;
+    margin-bottom: 3rem;
     
     h1{
         font-family: 'gilroy';
@@ -17,7 +17,7 @@
         border: 2px solid #5d5a3f;
         border-radius: 10px;
         width: 80%;
-        height: 80%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         // grid-template-rows: 80px auto 80px;
@@ -79,22 +79,21 @@
         .editor-main{
             display: flex;
             gap: 3rem;
-            padding: 2rem;
+            
+            padding: 0 2rem;
             ::-webkit-scrollbar {
                 width: 5px;
-              }
-              
-              /* Track */
-              ::-webkit-scrollbar-track {
-                background: none;
-                margin-block: 25px;
-              }
-               
-              /* Handle */
-              ::-webkit-scrollbar-thumb {
-                background: rgb(0, 255, 208);
-                border-radius: 50px;
-              }
+            }
+            /* Track */
+            ::-webkit-scrollbar-track {
+            background: none;
+            margin-block: 25px;
+            }
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+            background: rgb(0, 255, 208);
+            border-radius: 50px;
+            }
             .text-container{
                 width: 80%;
                 overflow-y: scroll;
@@ -103,6 +102,7 @@
                 background: #5d5a3f;
                 border-radius: 30px;
                 width: 20%;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

@@ -9,10 +9,10 @@
       </a>
   </div>
   <div id="nav-items" class="hidden flex sm-w-100pc  md-flex md-flex-row md-justify-end items-center">
-      <a href="#home" class=" mx-3 py-3  no-underline hover-underline" routerLink="/admin/data">მთავარი</a>
-      <a href="#features" class=" mx-3 py-3  no-underline hover-underline">ტექსტის დამუშავება</a>
+      <a href="#home" class=" mx-3 py-3  no-underline hover-underline" routerLink="/">მთავარი</a>
+      <a href="/upload-file" class=" mx-3 py-3  no-underline hover-underline">ტექსტის დამარცვლა</a>
       <a href="#pricing" class=" mx-3 py-3  no-underline hover-underline">ფასები</a>
-      <a href="#blog" class=" mx-3 py-3  no-underline hover-underline">გადმოწერა</a>
+      <a href="#blog" class=" mx-3 py-3  no-underline hover-underline" routerLink="/user/download" *ngIf="loggedIn">გადმოწერა</a>
       <a  class="button bg-white black fw-600 no-underline mx-5" routerLink="/login" *ngIf="!loggedIn">ავტორიზაცია</a>
       <a  class="button bg-white black fw-600 no-underline mx-5" routerLink="/user" *ngIf="loggedIn">პროფილი</a>
   </div>
