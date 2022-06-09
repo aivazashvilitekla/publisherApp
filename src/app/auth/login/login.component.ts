@@ -47,10 +47,11 @@ export class LoginComponent implements OnInit {
       const user = this.loginForm.value;
       this.loadingService.startLoading();
       this.auth.SignIn(user.email, user.password).subscribe({
-        next: () => {
+        complete: () => {
           this.loadingService.stopLoading();
           localStorage.setItem('loggedIn', 'true');
           this.router.navigate(['/']);
+          if(user.email==='admin@gmail.com') localStorage.setItem('admin', 'true');
         },
         error: (error) => {
           this.loadingService.stopLoading();

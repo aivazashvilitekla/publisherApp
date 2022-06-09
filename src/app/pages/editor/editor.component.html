@@ -14,7 +14,12 @@
     <main class="editor-main">
       <div class="text-container">
         <form *ngIf="editorForm" [formGroup]="editorForm">
-          <angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor>
+          <div id="bla"
+            contenteditable="true"
+            style="width: 200px; height: 200px"
+          ></div>
+          <!-- <textarea contenteditable="true" formControlName="htmlContent" cols="30" rows="10"></textarea> -->
+          <!-- <angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor> -->
         </form>
       </div>
       <div class="corrections">
@@ -63,13 +68,6 @@
           <input type="checkbox" id="barbarisms" />
           <label for="barbarisms">ბარბარიზმები</label>
         </div>
-        <div class="clean">
-          <input type="checkbox" id="clean" />
-          <label for="clean">წმენდა</label>
-        </div>
-      </div>
-      <div class="download">
-        <button>გადმოწერა</button>
       </div>
     </footer>
   </div>

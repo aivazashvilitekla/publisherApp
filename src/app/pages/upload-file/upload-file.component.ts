@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { data, Steps, Work } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';
-import * as fs from 'unzipper';
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
@@ -18,6 +17,7 @@ export class UploadFileComponent implements OnInit {
   fileProcessing = false;
   doneProcessing = false;
 
+  
   pickWork() {
     // TODO change max number
     const randomAuthorId = Math.floor(Math.random() * (3 - 1) + 1);
@@ -68,19 +68,18 @@ export class UploadFileComponent implements OnInit {
 
       upload$.subscribe((res) => {
         console.log(res);
-        this.stepsVar = Steps.Overview;
-        this.getPages();
+        this.stepsVar = Steps.Processing;
+        // this.getPages();
       });
       // this.stepsVar = Steps.Overview;
     }
   }
   getPages() {
-    
     this.http
       .get(`https://localhost:44371/api/GetDocPages/${this.filename}`, {
         responseType: 'arraybuffer',
       })
-      .subscribe();
+      .subscribe((data) => this.getZipFile(data, 'application/zip'));
   }
   startProcessing() {
     // localhost:44371/api/HypDoc/{fileName} [GET]

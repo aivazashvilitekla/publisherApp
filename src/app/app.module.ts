@@ -27,7 +27,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './a-user/user-routing.module';
 import { UserDashboardComponent } from './a-user/user-dashboard/user-dashboard.component';
 import { UserSidebarComponent } from './a-user/user-sidebar/user-sidebar.component';
@@ -61,6 +61,7 @@ import { EditorComponent } from './pages/editor/editor.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     FontAwesomeModule,
@@ -72,7 +73,7 @@ import { EditorComponent } from './pages/editor/editor.component';
     ReactiveFormsModule,
 
     // AngularFirestore
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     UserRoutingModule,
     HttpClientModule, AngularEditorModule

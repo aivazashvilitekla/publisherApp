@@ -18,7 +18,7 @@ export class EditorComponent implements OnInit {
     maxHeight: 'auto',
     width: 'auto',
     minWidth: '640px',
-    translate: 'no',
+    translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
     placeholder: 'Enter text here...',
@@ -54,19 +54,35 @@ export class EditorComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
   checkText() {
-    if (this.editorForm?.valid) {
-      const value = this.editorForm.value;
-      console.log(value);
+    const el = document.getElementById('bla');
+    if (el)
+      // console.log(el?.innerHTML)
+      // console.log(el?.innerText)
       this.http
-        .post('https://localhost:44371/api/HypText', {
-          Text: value.htmlContent,
+        .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
+          Text: el?.innerText,
         })
-        .subscribe((res: any) =>
-          this.editorForm?.patchValue({
-            htmlContent: res.Text,
-          })
+        .subscribe(
+          (res: any) => (el.innerHTML = res.textDTO.Text)
+          // console.log(res.textDTO.Text)
+          // this.editorForm?.patchValue({
+          //   htmlContent: res.textDTO.Text,
+          // })
         );
-    }
+    // if (this.editorForm?.valid) {
+    //   const value = this.editorForm.value;
+    //   // console.log(value.htmlContent);
+    //   this.http
+    //     .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
+    //       Text: value.htmlContent,
+    //     })
+    //     .subscribe((res: any) =>
+    //       // console.log(res.textDTO.Text)
+    //       this.editorForm?.patchValue({
+    //         htmlContent: res.textDTO.Text,
+    //       })
+    //     );
+    // }
   }
   ngOnInit() {
     this._initEditorForm();
