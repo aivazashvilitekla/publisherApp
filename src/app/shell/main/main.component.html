@@ -41,7 +41,7 @@
     <div class="w-100pc md-w-40pc">
       <div class="br-8 m-5 items-center text-center" id="card">
         <div class="bg-indigo-lightest-10 br-round w-l5 h-l5" id="icon-hyphen">
-          ა
+          <fa-icon [icon]="faSortAlphaAsc"></fa-icon>
         </div>
         <h4 class="white fw-600 fs-m2">ტექსტის დამარცვლა</h4>
         <div class="indigo-lightest fw-600 txt opacity-50 lh-2">
@@ -59,7 +59,7 @@
         <div
           class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round"
         >
-          <i data-feather="edit-3" class="w-l5"></i>
+        <fa-icon [icon]="faPencil"></fa-icon>
         </div>
         <h4 class="white fw-600 fs-m2">კორექტორი</h4>
         <div class="indigo-lightest fw-600 txt opacity-50 lh-2">
@@ -78,14 +78,14 @@
         <div
           class="flex justify-center items-center bg-indigo-lightest-10 white w-l5 h-l5 br-round"
         >
-          <i data-feather="book" class="w-l5"></i>
+        <fa-icon [icon]="faWarehouse"></fa-icon>
         </div>
         <h4 class="white fw-600 fs-m2">ლექსიკონი</h4>
         <div class="indigo-lightest fw-600 txt opacity-50 lh-2">
           იქნებ, უკეთესი სინონიმი ნახო აქ? გამოიყენე ქართული ენის ლექსიკონი.
         </div>
         <a
-          href="#"
+          href="/dictionary"
           class="button bg-indigo-lightest-10 fs-s3 white no-underline hover-opacity-100 hover-scale-up-1 ease-300"
           >ლექსიკონი</a
         >
@@ -325,6 +325,7 @@
               class="br-round"
               src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Shota_rustaveli_qartuli.jpg"
               alt=""
+              style="width: inherit;height: inherit;"
             />
           </div>
           <div class="ml-4 fs-s1">
@@ -346,7 +347,8 @@
           <div class="block br-round border bc-black bw-4 w-l3 h-l3">
             <img
               class="br-round"
-              src="https://scontent.ftbs5-3.fna.fbcdn.net/v/t39.30808-6/247082785_3012372965701921_7092771843216256386_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=FwNujQ7ebdwAX_lF1KL&_nc_ht=scontent.ftbs5-3.fna&oh=00_AT9eiS9B3Yp3qZ9bNUlK6ciAyTxdZY2bPN4lUJQ_L7WBkw&oe=626407FD"
+              src="../../../assets/images/luka.jpg"
+              style="width: inherit;height: inherit;"
               alt=""
             />
           </div>
@@ -369,7 +371,8 @@
           <div class="block br-round border bc-black bw-4 w-l3 h-l3">
             <img
               class="br-round"
-              src="https://scontent.ftbs5-3.fna.fbcdn.net/v/t1.6435-9/104045990_4031746850200413_6946975703689088905_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFxtKCBvvWOpL5d7liYyqnvA9bFXqUQJlwD1sVepRAmXLiCzQ8y4S2e1V4irdM703VouJqagPcj1KvCIcNVVNf1&_nc_ohc=o1QGftqpB0QAX_YxLl3&tn=sJ8UM1TMtuBHKYKR&_nc_ht=scontent.ftbs5-3.fna&oh=00_AT8q1YFCvMDM66w7bewyG_Hto-xamM_99hmZzqYxNHcMxw&oe=62833C1B"
+              src="../../../assets/images/lasha.jpg"
+              style="width: inherit;height: inherit;"
               alt=""
             />
           </div>
@@ -392,7 +395,8 @@
           <div class="block br-round border bc-black bw-4 w-l3 h-l3">
             <img
               class="br-round"
-              src="https://scontent.ftbs5-3.fna.fbcdn.net/v/t1.6435-9/75552932_2609768679110120_118605075202441216_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=174925&_nc_eui2=AeHXc84JkNfF89P2uk1INm--tWwl2JIgIla1bCXYkiAiVs54E13gexarlh-5H2DMYhTp2-AKNAg-O6W92UfTLzBq&_nc_ohc=kUHfcYUJvyYAX961H5N&_nc_ht=scontent.ftbs5-3.fna&oh=00_AT9ASBu7gChvACvgPRPokGY862RN35MpBzJZcYb1Omre-g&oe=6285450F"
+              src="../../../assets/images/tekla.jpg"
+              style="width: inherit;height: inherit;"
               alt=""
             />
           </div>
@@ -433,7 +437,7 @@
 <!-- blog -->
 <section class="p-0 md-p-5">
   <div class="flex flex-wrap">
-    <div class="w-100pc md-w-33pc p-10">
+    <div class="w-100pc md-w-33pc p-10" routerLink="/blog">
       <a
         href="#"
         class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"
@@ -449,7 +453,7 @@
         </div>
       </a>
     </div>
-    <div class="w-100pc md-w-33pc p-10">
+    <div class="w-100pc md-w-33pc p-10" routerLink="/blog">
       <a
         href="#"
         class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"
@@ -463,7 +467,7 @@
         <div class="indigo fs-s3 italic after-arrow-right my-4">მზადდება</div>
       </a>
     </div>
-    <div class="w-100pc md-w-33pc p-10">
+    <div class="w-100pc md-w-33pc p-10" routerLink="/blog">
       <a
         href="#"
         class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"

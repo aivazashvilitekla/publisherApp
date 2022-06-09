@@ -1,0 +1,98 @@
+
+.dictionary{
+    width: 95vw;
+    height: 50vh;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+    h1{
+        font-family: 'gilroy';
+        font-size: 50px;
+        margin-bottom: 1rem;
+    }
+    .dictionary-container{
+        border: 2px solid #5d5a3f;
+        border-radius: 10px;
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        // grid-template-rows: 80px auto 80px;
+        header{
+            height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            border-bottom: 2px solid #5d5a3f;
+            &>div{
+                width: 33.3%;
+                display: flex;
+                justify-content: center;
+            }
+            button{
+                font-family: 'gilroy';
+                background: #a2a2a2;
+                border-radius: 50px;
+                padding: 1rem 3rem;
+                outline: none;
+                border: none;
+                color: white;
+                background: #00ed86;
+            }
+            label{
+                font-family: 'gilroy';
+            }
+            .options {
+                display: flex;
+                flex-direction: column;
+                form div{
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
+                }
+                justify-self: flex-start;
+            }
+            .search input{
+                border: none;
+                border-bottom: 1px solid white;
+                outline: none;
+                background: none;
+                text-align: center;
+                padding-bottom: 10px;
+                color: white;
+            }
+            .check{
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .dictionary-main{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .dictionary-search-results{
+                width: 50%;
+                height: 80%;
+                background: #5d5a3f;
+                border-radius: 30px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.5rem;
+                h3{
+                    font-weight: bold;
+                    font-family: 'gilroy';
+                }
+            }
+        }
+    }
+}

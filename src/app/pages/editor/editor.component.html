@@ -1,8 +1,20 @@
+
 <section class="editor">
   <h1>კორექტორი</h1>
   <div class="editor-container">
     <header>
-      <div class="bla"></div>
+      <div class="bla">
+        <div class="lds-roller" *ngIf="loading">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <div class="check">
         <button (click)="checkText()">შეამოწმე</button>
       </div>
@@ -13,46 +25,20 @@
     </header>
     <main class="editor-main">
       <div class="text-container">
-        <form *ngIf="editorForm" [formGroup]="editorForm">
-          <div id="bla"
-            contenteditable="true"
-            style="width: 200px; height: 200px"
-          ></div>
+        <form >
+          <div id="bla" contenteditable="true"></div>
+          
           <!-- <textarea contenteditable="true" formControlName="htmlContent" cols="30" rows="10"></textarea> -->
           <!-- <angular-editor formControlName="htmlContent" [config]="editorConfig"></angular-editor> -->
         </form>
       </div>
-      <div class="corrections">
+      <div class="corrections" *ngIf="checked">
         <header>
           <span>შედეგები:</span>
         </header>
         <main class="words-container">
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>სიტყვა</p>
-          </div>
-          <div class="word">
-            <p>bla</p>
+          <div class="word" *ngFor="let word of wordsInfo">
+            <p>{{word}}</p>
           </div>
         </main>
       </div>
@@ -60,14 +46,16 @@
     <footer>
       <div class="bla"></div>
       <div class="options">
-        <div class="morphology">
-          <input type="checkbox" id="morphology" />
-          <label for="morphology">მორფოლოგია</label>
-        </div>
-        <div class="barbarisms">
-          <input type="checkbox" id="barbarisms" />
-          <label for="barbarisms">ბარბარიზმები</label>
-        </div>
+        <form *ngIf="editorForm" [formGroup]="editorForm">
+          <div class="morphology">
+            <input type="checkbox" id="morphology" formControlName="morphology" />
+            <label for="morphology">მორფოლოგია</label>
+          </div>
+          <div class="barbarisms">
+            <input type="checkbox" id="barbarisms" formControlName="barbarisms" />
+            <label for="barbarisms">ბარბარიზმები</label>
+          </div>
+        </form>
       </div>
     </footer>
   </div>

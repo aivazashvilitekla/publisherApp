@@ -1,0 +1,47 @@
+<section class="dictionary">
+  <h1>ლექსიკონი</h1>
+  <div class="dictionary-container">
+    <header>
+      <div class="options">
+        <form *ngIf="editorForm" [formGroup]="editorForm">
+          <div class="morphology">
+            <input
+              type="checkbox"
+              id="morphology"
+              formControlName="morphology"
+            />
+            <label for="morphology">მორფოლოგია</label>
+          </div>
+          <div class="barbarisms">
+            <input
+              type="checkbox"
+              id="barbarisms"
+              formControlName="barbarisms"
+            />
+            <label for="barbarisms">ბარბარიზმები</label>
+          </div>
+        </form>
+      </div>
+      <div class="search">
+        <form *ngIf="searchForm" [formGroup]="searchForm">
+          <input
+            type="text"
+            placeholder="ძებნა..."
+            formControlName="searchText"
+          />
+        </form>
+      </div>
+      <!-- <div class="check">
+        <button (click)="checkText()">შეამოწმე</button>
+      </div> -->
+    </header>
+    <main class="dictionary-main">
+      <div class="dictionary-search-results">
+        <div class="word" *ngFor="let item of searchedArr">
+          <h3>{{item.Wrong_Word}}</h3>
+          <p>{{item.Description}}</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</section>

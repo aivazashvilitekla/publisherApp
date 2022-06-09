@@ -107,11 +107,15 @@ export class RegisterComponent implements OnInit {
         .pipe(finalize(() => this.loadingService.stopLoading()))
         .subscribe({
           next: () => {
-            localStorage.setItem('loggedIn', `${this.user.firstName[0]}${this.user.lastName[0]}`.toUpperCase());
+            localStorage.setItem(
+              'loggedIn',
+              `${this.user.firstName[0]}${this.user.lastName[0]}`.toUpperCase()
+            );
             this.router.navigate(['/']);
           },
           complete: () => {
-            if(this.user.email==='admin@gmail.com') localStorage.setItem('admin', 'true');
+            if (this.user.email === 'admin@gmail.com')
+              localStorage.setItem('admin', 'true');
           },
           error: (err) =>
             this.toastrService.showErrorMessage(showAuthError(err)),

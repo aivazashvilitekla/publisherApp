@@ -36,6 +36,7 @@ import { MorphologyComponent } from './admin/morphology/morphology.component';
 import { UploadFileComponent } from './pages/upload-file/upload-file.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditorComponent } from './pages/editor/editor.component';
+import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { EditorComponent } from './pages/editor/editor.component';
     UserSidebarComponent,
     UserProfileComponent,
     UploadFileComponent,
-    EditorComponent
+    EditorComponent,
+    DictionaryComponent
   ],
   imports: [
     BrowserModule,

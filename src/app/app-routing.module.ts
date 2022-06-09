@@ -11,12 +11,12 @@ import { BlogPanelComponent } from './admin/blog-panel/blog-panel.component';
 import { DataComponent } from './admin/data/data.component';
 import { MorphologyComponent } from './admin/morphology/morphology.component';
 import { PanelComponent } from './admin/panel/panel.component';
-import { StatisticsComponent } from './admin/statistics/statistics.component';
 import { UsersComponent } from './admin/users/users.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { BlogComponent } from './pages/blog/blog.component';
+import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { EditorComponent } from './pages/editor/editor.component';
 import { FileComponent } from './pages/file/file.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
@@ -58,6 +58,10 @@ const routes: Routes = [
         path: 'editor',
         component: EditorComponent,
       },
+      {
+        path: 'dictionary',
+        component: DictionaryComponent,
+      },
     ],
   },
 
@@ -82,10 +86,6 @@ const routes: Routes = [
       {
         path: 'data',
         component: DataComponent,
-      },
-      {
-        path: 'statistics',
-        component: StatisticsComponent,
       },
       {
         path: 'users',

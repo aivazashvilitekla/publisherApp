@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
 
 @Component({
   selector: 'app-editor',
@@ -9,6 +11,10 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
+  checked: boolean = false;
+  loading = false;
+  wordsInfo: any = {};
+
   editorForm: FormGroup | undefined;
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -52,23 +58,42 @@ export class EditorComponent implements OnInit {
     toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
   };
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private toastrService: ToastrMessagesService
+  ) {}
   checkText() {
     const el = document.getElementById('bla');
-    if (el)
-      // console.log(el?.innerHTML)
-      // console.log(el?.innerText)
-      this.http
-        .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
-          Text: el?.innerText,
-        })
-        .subscribe(
-          (res: any) => (el.innerHTML = res.textDTO.Text)
-          // console.log(res.textDTO.Text)
-          // this.editorForm?.patchValue({
-          //   htmlContent: res.textDTO.Text,
-          // })
+    if (el && el.innerText && this.editorForm) {
+      if (
+        this.editorForm.value.barbarisms ||
+        this.editorForm.value.morphology
+      ) {
+        if (this.editorForm.value.barbarisms) {
+          this.loading = true;
+          this.http
+            .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
+              Text: el?.innerText,
+            })
+            .subscribe((res: any) => {
+              this.wordsInfo = Object.keys(res.occurrences);
+              el.innerHTML = res.textDTO.Text;
+              this.loading = false;
+              this.checked = true;
+              console.log(this.wordsInfo);
+            });
+        } else {
+          // TODO
+        }
+      } else {
+        this.toastrService.showErrorMessage(
+          'გთხოვთ მონიშნეთ სასურველი პარამეტრები.'
         );
+      }
+    } else {
+      this.toastrService.showErrorMessage('ტექსტის ველი ცარიელია...');
+    }
     // if (this.editorForm?.valid) {
     //   const value = this.editorForm.value;
     //   // console.log(value.htmlContent);
@@ -86,10 +111,12 @@ export class EditorComponent implements OnInit {
   }
   ngOnInit() {
     this._initEditorForm();
+    console.log(this.editorForm?.value);
   }
   private _initEditorForm() {
     this.editorForm = this.fb.group({
-      htmlContent: ['', Validators.required],
+      barbarisms: ['', Validators.required],
+      morphology: ['', Validators.required],
     });
   }
 }
