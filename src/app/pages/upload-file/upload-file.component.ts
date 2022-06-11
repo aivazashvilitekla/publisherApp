@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
 import { data, Steps, Work } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';
+import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
@@ -10,23 +13,31 @@ import { ApiService } from 'src/app/services/api.service';
 export class UploadFileComponent implements OnInit {
   selectedWork: Work | undefined;
   loading = false;
-  stepsVar: Steps = Steps.Overview;
+  stepsVar: Steps = Steps.Uploading;
   steps = Steps;
   uploadedFile: any;
   filename: string = '';
   fileProcessing = false;
   doneProcessing = false;
+  lastSelected!: number;
 
-  
-  pickWork() {
+  optionsForm: FormGroup | undefined;
+  parentForm: FormGroup | any;
+  showOptionsForm: boolean = false;
+  formBody: any;
+
+  pickWork(fromButton?: number) {
     // TODO change max number
-    const randomAuthorId = Math.floor(Math.random() * (3 - 1) + 1);
+    let randomAuthorId = Math.floor(Math.random() * (3 - 1) + 1);
+    if (fromButton) {
+      while (this.lastSelected === randomAuthorId) {
+        randomAuthorId = Math.floor(Math.random() * (3 - 1) + 1);
+      }
+    }
+    this.lastSelected = randomAuthorId;
 
-    // const randomAuthorId = 1;
-    // const randomWorkId = 101;
     const foundAuthor: any = data.find((item) => item.id === randomAuthorId);
     const randomWorkId = Math.floor(Math.random() * foundAuthor.writing.length);
-    console.log(randomWorkId);
 
     const foundWriting: any = foundAuthor.writing[randomWorkId];
     this.selectedWork = {
@@ -35,11 +46,47 @@ export class UploadFileComponent implements OnInit {
     };
   }
 
-  constructor(private apiService: ApiService, private http: HttpClient) {}
+  constructor(
+    private apiService: ApiService,
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private toastrService: ToastrMessagesService
+  ) {}
 
   ngOnInit() {
     this.pickWork();
+    this._initOptionsForm();
+    this._initParentForm();
+    this.listeningForm();
     this.dragAreaClass = 'dragarea';
+  }
+  listeningForm() {
+    this.parentForm.valueChanges
+      .pipe(
+        tap((res: any) => {
+          if (res.cleaning) {
+            return (this.showOptionsForm = true);
+          }
+          return (this.showOptionsForm = false);
+        })
+      )
+      .subscribe();
+  }
+  private _initOptionsForm() {
+    this.optionsForm = this.fb.group({
+      cleanSpaces: [''],
+      cleanOldHyphenation: [''],
+      cleanExcessParagraphs: [''],
+      cleanNewLines: [''],
+      cleanTabs: [''],
+      correctPDashStarts: [''],
+    });
+  }
+  private _initParentForm() {
+    this.parentForm = this.fb.group({
+      cleaning: [''],
+      hyp: [''],
+    });
   }
   error!: string;
   dragAreaClass!: string;
@@ -66,16 +113,158 @@ export class UploadFileComponent implements OnInit {
         formData
       );
 
-      upload$.subscribe((res) => {
-        console.log(res);
-        this.stepsVar = Steps.Overview;
-        // this.getPages();
+      upload$.subscribe({
+        next: (res: any) => {
+          this.filename = res.FileName;
+
+          // this.getPages();
+        },
+        complete: () => {
+          this.stepsVar = Steps.Overview;
+        },
+        error: (error) => {
+          this.toastrService.showErrorMessage(`${error}`);
+        },
       });
-      // this.stepsVar = Steps.Overview;
     }
   }
   next() {
-    this.stepsVar = Steps.Processing;
+    if (this.parentForm.value.hyp && this.parentForm.value.cleaning) {
+      const formValues = this.optionsForm?.value;
+      if (
+        formValues.cleanSpaces ||
+        formValues.cleanOldHyphenation ||
+        formValues.cleanExcessParagraphs ||
+        formValues.cleanNewLines ||
+        formValues.cleanTabs ||
+        formValues.correctPDashStarts
+      ) {
+        this.formBody = {
+          CleanSpaces: formValues.cleanSpaces,
+          CleanOldHyphenation: formValues.cleanOldHyphenation,
+          CleanExcessParagraphs: formValues.cleanExcessParagraphs,
+          CleanNewLines: formValues.cleanNewLines,
+          CleanTabs: formValues.cleanTabs,
+          CorrectPDashStarts: formValues.correctPDashStarts,
+        };
+        this.stepsVar = Steps.Processing;
+        this.fileProcessing = true;
+        const file$ = this.apiService.cleanDoc(
+          `https://localhost:44371/api/CleanDoc/${this.filename}`,
+          this.formBody
+        );
+        file$.subscribe(
+          {
+            next: (res: any) => {
+              this.filename = res.FileName;
+              console.log('bla')
+    
+              // this.getPages();
+            },
+            complete: () => {
+              this.fileProcessing = false;
+              this.doneProcessing = true;
+            },
+            error: (error) => {
+              this.fileProcessing = false;
+              this.toastrService.showErrorMessage(`${error}`);
+            },
+          }
+        //   (res: any) => {
+        //   this.filename = res.FileName;
+        //   this.fileProcessing = false;
+        //   this.doneProcessing = true;
+        // }
+        );
+      } else {
+        this.toastrService.showErrorMessage(
+          'გთხოვთ აირჩიეთ მინიმუმ ერთი პარამეტრი.'
+        );
+      }
+    } else if (this.parentForm.value.hyp && !this.parentForm.value.cleaning) {
+      this.stepsVar = Steps.Processing;
+      this.fileProcessing = true;
+      const file$ = this.apiService.hypDoc(
+        `https://localhost:44371/api/HypDoc/${this.filename}`
+      );
+      file$.subscribe((res: any) => {
+        this.filename = res.FileName;
+        this.fileProcessing = false;
+        this.doneProcessing = true;
+      });
+    } else if (this.parentForm.value.cleaning && !this.parentForm.value.hyp) {
+      if (this.optionsForm) {
+        const formValues = this.optionsForm.value;
+        if (
+          formValues.cleanSpaces ||
+          formValues.cleanOldHyphenation ||
+          formValues.cleanExcessParagraphs ||
+          formValues.cleanNewLines ||
+          formValues.cleanTabs ||
+          formValues.correctPDashStarts
+        ) {
+          this.formBody = {
+            CleanSpaces: formValues.cleanSpaces,
+            CleanOldHyphenation: formValues.cleanOldHyphenation,
+            CleanExcessParagraphs: formValues.cleanExcessParagraphs,
+            CleanNewLines: formValues.cleanNewLines,
+            CleanTabs: formValues.cleanTabs,
+            CorrectPDashStarts: formValues.correctPDashStarts,
+          };
+          console.log(this.formBody);
+          console.log(this.filename);
+          this.stepsVar = Steps.Processing;
+          this.fileProcessing = true;
+          const file$ = this.apiService.cleanDoc(
+            `https://localhost:44371/api/CleanDoc/${this.filename}`,
+            {
+              "CleanSpaces": true,
+              "CleanOldHyphenation": true,
+              "CleanExcessParagraphs": true,
+              "CleanNewLines": true,
+              "CleanTabs": true,
+              "CorrectPDashStarts": true
+          }
+          );
+          file$.subscribe({
+            next: (res: any) => {
+              this.filename = res.FileName;
+              console.log('bla')
+    
+              // this.getPages();
+            },
+            complete: () => {
+              this.fileProcessing = false;
+              this.doneProcessing = true;
+            },
+            error: (error) => {
+              this.fileProcessing = false;
+              this.toastrService.showErrorMessage(`${error}`);
+            },
+            // complete: () => {
+            //   (res: any) => {
+            //     this.filename = res.FileName;
+            //     this.fileProcessing = false;
+            //     this.doneProcessing = true;
+            //   };
+            // },
+            // error: () => {
+            //   (res: any) => {
+            //     this.fileProcessing = false;
+            //   };
+            // },
+          });
+        } else {
+          this.toastrService.showErrorMessage(
+            'გთხოვთ აირჩიეთ მინიმუმ ერთი პარამეტრი.'
+          );
+        }
+      }
+    } else {
+      this.toastrService.showErrorMessage(
+        'გთხოვთ აირჩიოთ სასურველი პარამეტრები.'
+      );
+    }
   }
   getPages() {
     this.http
@@ -86,6 +275,7 @@ export class UploadFileComponent implements OnInit {
   }
   startProcessing() {
     // localhost:44371/api/HypDoc/{fileName} [GET]
+    // localhost:44371/api/CleanDoc/{fileName}
     this.fileProcessing = true;
     const file$ = this.apiService.hypDoc(
       `https://localhost:44371/api/HypDoc/${this.filename}`

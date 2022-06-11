@@ -101,8 +101,46 @@
       </div>
     </main>
     <footer>
-      <div class="bla"></div>
-      <div class="pagination">
+      <div class="options">
+        <form class="parentForm" *ngIf="parentForm" [formGroup]="parentForm">
+          <div class="CleanSpacesParent">
+            <input type="checkbox" id="CleanSpacesParent" formControlName="cleaning" />
+            <label for="CleanSpacesParent">გასუფთავება</label>
+          </div>
+          
+          <div class="HypParent">
+            <input type="checkbox" id="HypParent" formControlName="hyp" />
+            <label for="HypParent">გადატანები</label>
+          </div>
+        </form>
+        <form class="cleaningsForm" *ngIf="optionsForm && showOptionsForm" [formGroup]="optionsForm">
+          <div class="CleanSpaces">
+            <input type="checkbox" id="CleanSpaces" formControlName="cleanSpaces" />
+            <label for="CleanSpaces">CleanSpaces</label>
+          </div>
+          <div class="CleanOldHyphenation">
+            <input type="checkbox" id="CleanOldHyphenation" formControlName="cleanOldHyphenation" />
+            <label for="CleanOldHyphenation">CleanOldHyphenation</label>
+          </div>
+          <div class="CleanExcessParagraphs">
+            <input type="checkbox" id="CleanExcessParagraphs" formControlName="cleanExcessParagraphs" />
+            <label for="CleanExcessParagraphs">CleanExcessParagraphs</label>
+          </div>
+          <div class="CleanNewLines">
+            <input type="checkbox" id="CleanNewLines" formControlName="cleanNewLines" />
+            <label for="CleanNewLines">CleanNewLines</label>
+          </div>
+          <div class="CleanTabs">
+            <input type="checkbox" id="CleanTabs" formControlName="cleanTabs" />
+            <label for="CleanTabs">CleanTabs</label>
+          </div>
+          <div class="CorrectPDashStarts">
+            <input type="checkbox" id="CorrectPDashStarts" formControlName="correctPDashStarts" />
+            <label for="CorrectPDashStarts">CorrectPDashStarts</label>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="pagination">
         <nav>
           <ul class="pagination">
             <li class="page-item"><a class="page-link">Previous</a></li>
@@ -110,9 +148,9 @@
             <li class="page-item"><a class="page-link">Next</a></li>
           </ul>
         </nav>
-      </div>
+      </div> -->
       <div class="next">
-        <button (click)="next()">შემდეგი</button>
+        <button (click)="next()">დაწყება</button>
       </div>
     </footer>
   </div>
@@ -161,11 +199,11 @@
       </div>
       <div class="processing-info">
         <div class="in-progress-text">
-          <span
+          <!-- <span
             *ngIf="!fileProcessing && !doneProcessing"
             (click)="startProcessing()"
             >დაწყება</span
-          >
+          > -->
           <span *ngIf="fileProcessing">მზადდება</span>
         </div>
       </div>
@@ -174,6 +212,9 @@
       <div class="work">
         <div class="work-container">
           <pre class="white">{{ selectedWork?.writing?.text }}</pre>
+        </div>
+        <div class="nextWork">
+          <span (click)="pickWork(1)">შემდეგი</span>
         </div>
       </div>
       <div class="waiting">
