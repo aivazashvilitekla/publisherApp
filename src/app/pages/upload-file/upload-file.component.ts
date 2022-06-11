@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class UploadFileComponent implements OnInit {
   selectedWork: Work | undefined;
   loading = false;
-  stepsVar: Steps = Steps.Uploading;
+  stepsVar: Steps = Steps.Overview;
   steps = Steps;
   uploadedFile: any;
   filename: string = '';
@@ -68,11 +68,14 @@ export class UploadFileComponent implements OnInit {
 
       upload$.subscribe((res) => {
         console.log(res);
-        this.stepsVar = Steps.Processing;
+        this.stepsVar = Steps.Overview;
         // this.getPages();
       });
       // this.stepsVar = Steps.Overview;
     }
+  }
+  next() {
+    this.stepsVar = Steps.Processing;
   }
   getPages() {
     this.http
