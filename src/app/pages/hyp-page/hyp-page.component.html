@@ -1,0 +1,29 @@
+<section class="editor">
+  <h1>გადატანები</h1>
+  <div class="editor-container">
+    <header>
+      <div class="bla">
+        <div class="lds-roller" *ngIf="loading">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="check">
+        <button (click)="checkText()">დაწყება</button>
+      </div>
+    </header>
+    <main class="editor-main">
+      <div class="text-container">
+        <form>
+          <div id="hypCont" contenteditable="true"></div>
+        </form>
+      </div>
+    </main>
+  </div>
+</section>

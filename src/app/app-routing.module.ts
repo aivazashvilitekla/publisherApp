@@ -20,6 +20,7 @@ import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { EditorComponent } from './pages/editor/editor.component';
 import { FileComponent } from './pages/file/file.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { HypPageComponent } from './pages/hyp-page/hyp-page.component';
 import { ProcessingComponent } from './pages/processing/processing.component';
 import { UploadFileComponent } from './pages/upload-file/upload-file.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'editor',
         component: EditorComponent,
+      },
+      {
+        path: 'hyp',
+        component: HypPageComponent,
       },
       {
         path: 'dictionary',

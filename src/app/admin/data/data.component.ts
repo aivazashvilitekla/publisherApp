@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faSearch, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { debounceTime, map, Observable, of, tap } from 'rxjs';
+import { debounceTime, finalize, map, Observable, of, tap } from 'rxjs';
 import {
   Barbarism,
   BarbarismPost,
   BarbarismsService,
 } from 'src/app/services/barbarisms.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
 @Component({
   selector: 'app-data',
@@ -26,11 +27,13 @@ export class DataComponent implements OnInit {
   editingWordId: number | undefined;
 
   searchedArr: BarbarismPost[] = [];
+  allBarbarisms: BarbarismPost[] | undefined;
 
   constructor(
     private barbarismService: BarbarismsService,
     private fb: FormBuilder,
-    private toastrService: ToastrMessagesService
+    private toastrService: ToastrMessagesService,
+    private loadingService: LoadingService
   ) {}
 
   private _initBarbarismForm() {
@@ -47,9 +50,15 @@ export class DataComponent implements OnInit {
     this.listeningSearch();
   }
   getBarbarisms() {
-    this.barbarisms$ = this.barbarismService.getBarbarisms(
-      'https://localhost:44371/api/Barbarism/GetAllBarbarisms'
-    );
+    this.loadingService.startLoading();
+    this.barbarisms$ = this.barbarismService
+      .getBarbarisms('https://localhost:44371/api/Barbarism/GetAllBarbarisms')
+      .pipe(
+        tap((res) => this.allBarbarisms = res),
+        finalize(() => {
+          this.loadingService.stopLoading();
+        })
+      );
   }
   onSubmit() {
     const api = 'https://localhost:44371/api/Barbarism/AddBarbarism';
@@ -97,17 +106,14 @@ export class DataComponent implements OnInit {
             return;
           }
           this.searchedArr = [];
-          const temp = this.barbarisms$?.pipe(
-            tap((data) => {
-              const t = data.find(
-                (item) =>
-                  item.Correct_Word.includes(searchText) ||
-                  item.Correct_Word === searchText
-              );
-              if (t) this.searchedArr?.push(t);
-            })
-          );
-          temp?.subscribe();
+          this.allBarbarisms?.forEach((item) => {
+            if (
+              item.Wrong_Word.startsWith(searchText) ||
+              item.Wrong_Word === searchText
+            ) {
+              this.searchedArr?.push(item);
+            }
+          });
           if (this.searchedArr) this.barbarisms$ = of(this.searchedArr);
         });
   }

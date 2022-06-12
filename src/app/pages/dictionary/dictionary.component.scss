@@ -1,7 +1,18 @@
-
+::-webkit-scrollbar {
+    width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+background: none;
+margin-block: 25px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #22221b;
+border-radius: 50px;
+}
 .dictionary{
     width: 95vw;
-    height: 50vh;
     margin: 4rem auto;
     display: flex;
     flex-direction: column;
@@ -27,7 +38,7 @@
             width: 100%;
             display: flex;
             align-items: center;
-            padding: 0 2rem;
+            padding: 2rem 0;
             border-bottom: 2px solid #5d5a3f;
             &>div{
                 width: 33.3%;
@@ -73,21 +84,25 @@
         }
         .dictionary-main{
             width: 100%;
-            height: 100%;
+            min-height: 500px;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 1rem 0;
             .dictionary-search-results{
                 width: 50%;
-                height: 80%;
+                min-height: 300px;
+                max-height: 500px;
                 background: #5d5a3f;
                 border-radius: 30px;
                 text-align: center;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                // justify-content: center;
                 align-items: center;
                 gap: 0.5rem;
+                overflow-y: scroll;
+                padding: 1rem 0;
                 h3{
                     font-weight: bold;
                     font-family: 'gilroy';

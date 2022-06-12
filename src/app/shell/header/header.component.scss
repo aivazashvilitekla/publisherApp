@@ -127,8 +127,8 @@ $menu_WIDTH: 150px;
     0.3s border-top-color;
 }
 
-.menu-title:hover { background: #8db842; }
-.menu-title:hover:before { border-top-color: #8db842; }
+.menu-title:hover { background: #000000; color: white; }
+.menu-title:hover:before { border-top-color: #000000; }
 
 .menu:hover > .menu-title:before {
   border-top-width: 0;

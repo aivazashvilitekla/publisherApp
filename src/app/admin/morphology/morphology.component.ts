@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from '@firebase/util';
 import { faSearch, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { debounceTime, Observable, of, tap } from 'rxjs';
+import { debounceTime, Observable, of, tap, finalize } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading.service';
 import {
   Morphology,
   MorphologyPost,
@@ -27,12 +27,14 @@ export class MorphologyComponent implements OnInit {
   editingWordId: number | undefined;
 
   morphologiesArr: MorphologyPost[] | undefined;
+  allMorphologies: MorphologyPost[] | undefined
   searchedArr: MorphologyPost[] = [];
 
   constructor(
     private morphologyService: MorphologyService,
     private fb: FormBuilder,
-    private toastrService: ToastrMessagesService
+    private toastrService: ToastrMessagesService,
+    private loadingService: LoadingService
   ) {}
 
   private _initMorphologyForm() {
@@ -62,23 +64,26 @@ export class MorphologyComponent implements OnInit {
             return;
           }
           this.searchedArr = [];
-          const temp = this.morphologies$?.pipe(
-            tap((data) => {
-              const t = data.find(
-                (item) =>
-                  item.Correct_Word.includes(searchText) ||
-                  item.Correct_Word === searchText
-              );
-              if (t) this.searchedArr?.push(t);
-            })
-          );
-          temp?.subscribe();
+          this.allMorphologies?.forEach((item) => {
+            if (
+              item.Wrong_Word.startsWith(searchText) ||
+              item.Wrong_Word === searchText
+            ) {
+              this.searchedArr?.push(item);
+            }
+          });
           if (this.searchedArr) this.morphologies$ = of(this.searchedArr);
         });
   }
   getMorphologies() {
+    this.loadingService.startLoading();
     this.morphologies$ = this.morphologyService.getMorphologies(
       'https://localhost:44371/api/Morphology/GetAllMorphologies'
+    ).pipe(
+      tap((res) => this.allMorphologies = res),
+      finalize(() => {
+        this.loadingService.stopLoading();
+      })
     );
   }
   onSubmit() {

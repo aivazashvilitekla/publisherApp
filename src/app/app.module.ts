@@ -37,6 +37,8 @@ import { UploadFileComponent } from './pages/upload-file/upload-file.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditorComponent } from './pages/editor/editor.component';
 import { DictionaryComponent } from './pages/dictionary/dictionary.component';
+import { HypPageComponent } from './pages/hyp-page/hyp-page.component';
+import { SecondLoadingComponent } from './shared/components/second-loading/second-loading.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { DictionaryComponent } from './pages/dictionary/dictionary.component';
     UserProfileComponent,
     UploadFileComponent,
     EditorComponent,
-    DictionaryComponent
+    DictionaryComponent,
+    HypPageComponent,
+    SecondLoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +82,8 @@ import { DictionaryComponent } from './pages/dictionary/dictionary.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     UserRoutingModule,
-    HttpClientModule, AngularEditorModule
+    HttpClientModule, AngularEditorModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

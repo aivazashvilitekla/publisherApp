@@ -15,6 +15,7 @@ export class DictionaryComponent implements OnInit {
   editorForm: FormGroup | undefined;
   searchForm: FormGroup | undefined;
   barbarisms$: Observable<BarbarismPost[]> | undefined;
+  allBarbarisms: BarbarismPost[] | undefined;
   searchedArr: BarbarismPost[] = [];
 
   constructor(
@@ -24,25 +25,26 @@ export class DictionaryComponent implements OnInit {
   checkText() {}
   ngOnInit() {
     this._initSearchForm();
-    this._initEditorForm();
-    this.getBarbarisms()
+    // this._initEditorForm();
+    this.getBarbarisms();
+    
     this.listeningSearch();
   }
-  private _initEditorForm() {
-    this.editorForm = this.fb.group({
-      barbarisms: [''],
-      morphology: [''],
-    });
-  }
+  // private _initEditorForm() {
+  //   this.editorForm = this.fb.group({
+  //     barbarisms: [''],
+  //     morphology: [''],
+  //   });
+  // }
   private _initSearchForm() {
     this.searchForm = this.fb.group({
       searchText: '',
     });
   }
   getBarbarisms() {
-    this.barbarisms$ = this.barbarismService.getBarbarisms(
-      'https://localhost:44371/api/Barbarism/GetAllBarbarisms'
-    );
+    this.barbarismService
+      .getBarbarisms('https://localhost:44371/api/Barbarism/GetAllBarbarisms')
+      .pipe(tap((data: any) =>this.allBarbarisms = data)).subscribe();
   }
   listeningSearch() {
     if (this.searchForm)
@@ -50,22 +52,19 @@ export class DictionaryComponent implements OnInit {
         .pipe(debounceTime(700), tap(console.log))
         .subscribe(({ searchText }) => {
           if (!searchText) {
+            this.searchedArr = [];
             return;
           }
           this.searchedArr = [];
-          this.barbarisms$?.pipe(
-            tap((data) => {
-              const t = data.find(
-                (item) =>
-                  item.Wrong_Word.startsWith(searchText) ||
-                  item.Wrong_Word === searchText
-              );
-              if (t) this.searchedArr?.push(t);
-            })
-          ).subscribe();
+          this.allBarbarisms?.forEach((item) => {
+            if (
+              item.Wrong_Word.startsWith(searchText) ||
+              item.Wrong_Word === searchText
+            ) {
+              this.searchedArr?.push(item);
+            }
+          });
           if (this.searchedArr) this.barbarisms$ = of(this.searchedArr);
-          console.log(this.searchedArr)
         });
-    
   }
 }

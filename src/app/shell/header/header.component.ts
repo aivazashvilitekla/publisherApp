@@ -29,4 +29,11 @@ export class HeaderComponent implements OnInit {
     }
     // console.log(this.authService.currentUser);
   }
+  signOut() {
+    this.authService.SignOut().subscribe({
+      complete: () => {
+        localStorage.clear();
+      },
+    });
+  }
 }
