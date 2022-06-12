@@ -57,7 +57,7 @@ export class DictionaryComponent implements OnInit {
             tap((data) => {
               const t = data.find(
                 (item) =>
-                  item.Wrong_Word.includes(searchText) ||
+                  item.Wrong_Word.startsWith(searchText) ||
                   item.Wrong_Word === searchText
               );
               if (t) this.searchedArr?.push(t);

@@ -3,6 +3,11 @@ export enum Steps {
   Overview = 'OVERVIEW',
   Processing = 'PROCESSING',
 }
+export enum WhileWorking {
+  Cleaning = 'Cleaning',
+  Hyp = 'Hyp',
+  Done = 'Done',
+}
 
 export interface Work {
   id: number;
@@ -192,7 +197,6 @@ export const data = [
         როს მხვდეს ამ სოფლად ჩემი წილობა?..`,
       },
     ],
-    
   },
   {
     id: 3,
@@ -237,6 +241,5 @@ export const data = [
         ჩემი გული და სისხლი - ეს ”MEMENTO MORI”-ა.`,
       },
     ],
-    
   },
 ];

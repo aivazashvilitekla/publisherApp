@@ -231,6 +231,9 @@
         .overview-main{
             height: 100%;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             gap: 3rem;
             padding: 1rem 2rem;
             ::-webkit-scrollbar {
@@ -252,6 +255,15 @@
                 overflow-y: scroll;
                 color: white;
                 padding: 1rem;
+            }
+            .pagination{
+                width: 200px;
+                overflow-x: scroll;
+                padding-bottom: 3px;
+                ::-webkit-scrollbar {
+                    width: 2px;
+                    height: 5px;
+                }
             }
         }
     }
@@ -502,6 +514,11 @@
                             }
                           }
                     }
+                }
+                .whileProcessing{
+                    color: white;
+                    font-family: 'kirovi';
+                    text-align: center;
                 }
                 .done{
                     display: flex;

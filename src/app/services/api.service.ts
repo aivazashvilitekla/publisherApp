@@ -17,8 +17,8 @@ export class ApiService {
   hypDoc(api: string, fileName?: string) {
     return this.http.get(api);
   }
-  cleanDoc(api: string, body: any,obj?: any) {
-    return this.http.post(api, body, obj);
+  cleanDoc(api: string, body?: any,obj?: any) {
+    return this.http.get(api);
   }
 
   //
