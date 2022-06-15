@@ -1,4 +1,6 @@
-
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-text)
+}
 .editor{
     width: 95vw;
     height: 80vh;

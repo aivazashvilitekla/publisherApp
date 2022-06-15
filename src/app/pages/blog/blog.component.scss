@@ -1,0 +1,36 @@
+main{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    .post-image{
+        // width: 200px;
+        height: 300px;
+    }
+    .singlePost{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0;
+        h1{
+            color: white;
+            font-size: 20px;
+        }
+        figure{
+            max-height: 400px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            img{
+                object-position: center;
+            }
+        }
+        .content{
+            pre{
+                
+            }
+        }
+    }
+}

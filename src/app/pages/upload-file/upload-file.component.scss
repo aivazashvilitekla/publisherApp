@@ -198,10 +198,11 @@
                 display: flex;
                 flex-direction: column;
                 padding: 1rem 0;
+                justify-content: flex-start;
                 .parentForm{
                     width: 100%;
                     display: flex;
-                    justify-content: center;
+                    // justify-content: center;
                     gap: 2rem;
                     .CleanSpacesParent, .HypParent{
                         display: flex;
@@ -218,7 +219,7 @@
                     display: flex;
                     flex-direction: column;
                     width: 80%;
-                    margin: 0.3rem auto;
+                    // margin: 0.3rem auto;
                     gap: 0.5rem;
                     &>div{
                         display: flex;
@@ -256,15 +257,22 @@
                 color: white;
                 padding: 1rem;
             }
-            .pagination{
-                width: 200px;
-                overflow-x: scroll;
-                padding-bottom: 3px;
-                ::-webkit-scrollbar {
-                    width: 2px;
-                    height: 5px;
-                }
-            }
+            // .pagination-ul{
+            //     width: 80%;
+            //     height: 200px;
+            //     // flex-wrap: wrap;
+            //     overflow: scroll;
+            //     padding-bottom: 3px;
+            //     display: grid;
+            //     grid-template-columns: repeat(1fr, 10);
+            //     grid-template-rows: auto;
+            //     // display: flex;
+            //     // justify-content: center;
+            //     ::-webkit-scrollbar {
+            //         width: 2px;
+            //         height: 5px;
+            //     }
+            // }
         }
     }
 }

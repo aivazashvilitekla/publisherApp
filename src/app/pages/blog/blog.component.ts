@@ -14,6 +14,7 @@ export interface Post {
   img: string;
   status: string;
   title: string;
+  date: string;
 }
 interface DocumentData {
   bookingMap: Record<number, Post[]>;
@@ -26,10 +27,16 @@ interface DocumentData {
 })
 export class BlogComponent implements OnInit {
   posts$: Observable<any[]> | undefined;
+  selectedPost: Post | undefined;
   constructor(private firestoreService: FirestoreService) {}
 
   ngOnInit() {
     this.posts$ = this.firestoreService.getPosts();
   }
-  
+  selectPost(post: Post) {
+    this.selectedPost = post;
+  }
+  backToPosts() {
+    this.selectedPost = undefined;
+  }
 }

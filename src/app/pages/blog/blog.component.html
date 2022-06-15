@@ -1,21 +1,50 @@
-
 <main>
-  <div class="flex flex-wrap" *ngIf="posts$ | async as posts">
-    <div class="w-100pc md-w-33pc p-10" *ngFor="let post of posts">
-      <a
-        href="#"
-        class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"
-      >
-        <img
-          class="w-100pc"
-          src="{{post.img}}"
-          alt="image"
-        />
-        <p class="fw-600 white fs-m3 mt-3">{{post.title}}</p>
-        <div class="indigo fs-s3 italic after-arrow-right my-4">
-          {{post.status}}
-        </div>
-      </a>
+  
+  <ng-container *ngIf="!selectedPost">
+    <div class="flex flex-wrap" *ngIf="posts$ | async as posts">
+      <div class="w-100pc md-w-33pc p-10" *ngFor="let post of posts">
+        <a
+          (click)="selectPost(post)"
+          class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"
+        >
+          <img class="w-100pc post-image" src="{{ post.img }}" alt="image" />
+          <p class="fw-600 white fs-m3 mt-3">{{ post.title }}</p>
+          <div class="indigo fs-s3 italic after-arrow-right my-4">
+            {{ post.status }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+  <div class="singlePost" *ngIf="selectedPost">
+    <button class="btn btn-outline-primary" (click)="backToPosts()">უკან</button>
+    <div class="col-lg-8">
+      <!-- Post content-->
+      <article>
+        <!-- Post header-->
+        <header class="mb-4">
+          <!-- Post title-->
+          <h1 class="fw-bolder mb-1">{{selectedPost.title}}</h1>
+          <!-- Post meta content-->
+          <div class="text-muted fst-italic mb-2 fs-6">
+            Posted on {{selectedPost.date | date}}
+          </div>
+        </header>
+        <!-- Preview image figure-->
+        <figure class="mb-4">
+          <img
+            class="img-fluid rounded"
+            src="{{selectedPost.img}}"
+            alt="img"
+          />
+        </figure>
+        <!-- Post content-->
+        <section class="mb-5 content">
+          <div class="white">
+            {{selectedPost.content}}
+          </div>
+        </section>
+      </article>
     </div>
   </div>
 </main>

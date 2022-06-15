@@ -29,6 +29,7 @@ export class BlogPanelComponent implements OnInit {
   ) {}
   addNewPost() {
     this.newPost = !this.newPost;
+    this.postForm?.reset();
   }
   private _initPostForm() {
     this.postForm = this.fb.group({
@@ -42,11 +43,13 @@ export class BlogPanelComponent implements OnInit {
   ngOnInit() {
     this._initPostForm();
     this.posts$ = this.firestoreService.getPosts().pipe(
-      tap(posts => posts.forEach(post => {
-        if (this.maxId < post['id']) {
-          this.maxId = post['id']
-        }
-      }))
+      tap((posts) =>
+        posts.forEach((post) => {
+          if (this.maxId < post['id']) {
+            this.maxId = post['id'];
+          }
+        })
+      )
     );
   }
   deletePost(postId: number) {
@@ -59,15 +62,15 @@ export class BlogPanelComponent implements OnInit {
       const newPost = await this.firestoreService.addPost({
         content: post.content,
         img: post.img,
-        id: this.maxId+1,
+        id: this.maxId + 1,
         status: post.status,
         title: post.title,
+        date: Date.now().toString(),
       });
-      console.log(newPost);
       this.postForm.reset();
       this.firestoreService.getPosts().subscribe();
     } else {
-      this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი.')
+      this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი.');
     }
   }
 }

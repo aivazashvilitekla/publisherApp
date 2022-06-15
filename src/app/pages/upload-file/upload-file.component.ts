@@ -15,6 +15,7 @@ import {
 } from 'rxjs';
 import { data, Steps, WhileWorking, Work } from 'src/app/models/models';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { ToastrMessagesService } from 'src/app/services/toastr-messages.service';
 @Component({
   selector: 'app-upload-file',
@@ -39,7 +40,7 @@ export class UploadFileComponent implements OnInit {
   showOptionsForm: boolean = false;
   formBody: any;
   firstPage!: string;
-  pageCount!: any;
+  pageCount: any[] = [];
   htmlPages: any;
 
   pickWork(fromButton?: number) {
@@ -66,7 +67,8 @@ export class UploadFileComponent implements OnInit {
     private apiService: ApiService,
     private http: HttpClient,
     private fb: FormBuilder,
-    private toastrService: ToastrMessagesService
+    private toastrService: ToastrMessagesService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit() {
@@ -286,18 +288,47 @@ export class UploadFileComponent implements OnInit {
       });
   }
   getPages() {
+    this.loadingService.startLoading();
     this.http
       .get(`https://localhost:44371/api/GetDocPages/${this.filename}`)
       .subscribe((res: any) => {
-        this.pageCount = Object.keys(res);
-        this.htmlPages = res;
+        // if (res.PageCount > 8) {
+        //   this.toastrService.showErrorMessage(
+        //     'გვერდების რაოდენობა აღემატება დაშვებულ რაოდენობას. აირჩიეთ სხვა დოკუმენტი ან შეიძინეთ პრემიუმ ვერსია.'
+        //   );
+        //   this.stepsVar = Steps.Uploading
+        //   this.loadingService.stopLoading();
+        //   return;
+        // }
+        for (let i = 1; i <= res.PageCount; i++) {
+          this.pageCount.push(i);
+        }
+        console.log(this.pageCount);
+        this.htmlPages = res.Pages;
         const el = document.getElementById('bla');
-        if (el) el.innerHTML = res['1'];
+        if (el) el.innerHTML = res.Pages['1'];
+        this.loadingService.stopLoading();
+        
       });
   }
   changePage(ind: any) {
-    const el = document.getElementById('bla');
-    if (el) el.innerHTML = this.htmlPages[ind];
+    // const el = document.getElementById('bla');
+    // if (el) el.innerHTML = this.htmlPages[ind];
+    if (!this.htmlPages[ind]) {
+      this.loadingService.startLoading();
+      this.http
+        .get(`https://localhost:44371/api/GetDocPages/${this.filename}`)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.htmlPages = res.Pages;
+          const el = document.getElementById('bla');
+          if (el) el.innerHTML = res.Pages[ind];
+          this.loadingService.stopLoading();
+        });
+    } else {
+      const el = document.getElementById('bla');
+      if (el) el.innerHTML = this.htmlPages[ind];
+    }
   }
   save() {
     this.http
@@ -307,11 +338,15 @@ export class UploadFileComponent implements OnInit {
       .subscribe((data) => this.getZipFile(data));
   }
   saveAsPDF() {
+    this.loadingService.startLoading();
     this.http
       .get(`https://localhost:44371/api/SaveWork/${this.filename}?pdf=true`, {
         responseType: 'arraybuffer',
       })
-      .subscribe((data) => this.getZipFile(data, 'application/pdf'));
+      .subscribe((data) => {
+        this.getZipFile(data, 'application/pdf');
+        this.loadingService.stopLoading();
+      });
   }
   private getZipFile(data: any, type?: string) {
     const blob = new Blob([data], { type: type ? type : 'application/x-zip' });
