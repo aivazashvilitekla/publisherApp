@@ -103,6 +103,11 @@ export class MorphologyComponent implements OnInit {
           this.toastrService.showSuccessMessage('სიტყვა წარმატებით დაემატა');
           this.getMorphologies();
         },
+        error: (error) => {
+          if (error.error === `Morphology: ${body.Wrong_Word} already exists in the database`) {
+            this.toastrService.showErrorMessage('ასეთი სიტყვა უკვე არსებობს ბაზაში');
+          }
+        }
       });
     } else {
       this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი');

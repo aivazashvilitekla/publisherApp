@@ -39,6 +39,7 @@ import { EditorComponent } from './pages/editor/editor.component';
 import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { HypPageComponent } from './pages/hyp-page/hyp-page.component';
 import { SecondLoadingComponent } from './shared/components/second-loading/second-loading.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { SecondLoadingComponent } from './shared/components/second-loading/secon
     EditorComponent,
     DictionaryComponent,
     HypPageComponent,
-    SecondLoadingComponent
+    SecondLoadingComponent, AboutUsComponent
   ],
   imports: [
     BrowserModule,

@@ -115,8 +115,8 @@ export class EditorComponent implements OnInit {
   }
   private _initEditorForm() {
     this.editorForm = this.fb.group({
-      barbarisms: ['', Validators.required],
-      morphology: ['', Validators.required],
+      barbarisms: [true, Validators.required],
+      morphology: [true, Validators.required],
     });
   }
 }

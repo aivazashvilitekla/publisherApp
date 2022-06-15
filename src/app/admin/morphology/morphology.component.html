@@ -9,14 +9,15 @@
       >
         <input
           type="text"
-          placeholder="სწორი ფორმა"
-          formControlName="Correct_Word"
-        />
-        <input
-          type="text"
           placeholder="არასწორი ფორმა"
           formControlName="Wrong_Word"
         />
+        <input
+          type="text"
+          placeholder="სწორი ფორმა"
+          formControlName="Correct_Word"
+        />
+
         <div class="buttons flex gap-2">
           <button type="submit" *ngIf="!editingMode">დამატება</button>
           <button type="button" *ngIf="editingMode" (click)="updateWord()">
@@ -42,9 +43,7 @@
       </div>
       <div class="words">
         <div class="word-card" *ngFor="let morphology of morphologies$ | async">
-          <h2>
-            {{ morphology.Wrong_Word }} —> {{ morphology.Correct_Word }}
-          </h2>
+          <h2>{{ morphology.Wrong_Word }} —> {{ morphology.Correct_Word }}</h2>
           <div class="actions">
             <fa-icon
               [icon]="faEdit"

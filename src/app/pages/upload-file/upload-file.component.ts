@@ -292,14 +292,14 @@ export class UploadFileComponent implements OnInit {
     this.http
       .get(`https://localhost:44371/api/GetDocPages/${this.filename}`)
       .subscribe((res: any) => {
-        // if (res.PageCount > 8) {
-        //   this.toastrService.showErrorMessage(
-        //     'გვერდების რაოდენობა აღემატება დაშვებულ რაოდენობას. აირჩიეთ სხვა დოკუმენტი ან შეიძინეთ პრემიუმ ვერსია.'
-        //   );
-        //   this.stepsVar = Steps.Uploading
-        //   this.loadingService.stopLoading();
-        //   return;
-        // }
+        if (res.PageCount > 8) {
+          this.toastrService.showErrorMessage(
+            'გვერდების რაოდენობა აღემატება დაშვებულ რაოდენობას. აირჩიეთ სხვა დოკუმენტი ან შეიძინეთ პრემიუმ ვერსია.'
+          );
+          this.stepsVar = Steps.Uploading
+          this.loadingService.stopLoading();
+          return;
+        }
         for (let i = 1; i <= res.PageCount; i++) {
           this.pageCount.push(i);
         }
@@ -317,7 +317,7 @@ export class UploadFileComponent implements OnInit {
     if (!this.htmlPages[ind]) {
       this.loadingService.startLoading();
       this.http
-        .get(`https://localhost:44371/api/GetDocPages/${this.filename}`)
+        .get(`https://localhost:44371/api/GetDocPages/${this.filename}?page=${ind}&clean=true`)
         .subscribe((res: any) => {
           console.log(res);
           this.htmlPages = res.Pages;

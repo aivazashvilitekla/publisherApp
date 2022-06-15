@@ -1,0 +1,49 @@
+.about-us{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 2rem;
+    h1{
+        width: fit-content;
+        color: #a4a4a4;
+        font-size:60px;
+        font-family: 'tanamedrove';
+        border-bottom: 2px solid #a4a4a4;
+    }
+    .container-container{
+        background: #2b2b2b;
+        border-top: 1px solid #fbf213;
+        padding: 1rem 0;
+        .text-container{
+            margin: 0 auto;
+            width: 70%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            
+           
+            color: white;
+            font-family: 'firago';
+            padding: 2rem 0;
+            overflow-y: scroll;
+            max-height: 400px;
+        }
+    }
+    
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+background: none;
+margin-block: 25px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: rgb(0, 0, 0);
+border-radius: 50px;
+}

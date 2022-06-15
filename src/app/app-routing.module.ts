@@ -15,6 +15,7 @@ import { UsersComponent } from './admin/users/users.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { EditorComponent } from './pages/editor/editor.component';
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'dictionary',
         component: DictionaryComponent,
+      },
+      {
+        path: 'about-us',
+        component: AboutUsComponent,
       },
     ],
   },
