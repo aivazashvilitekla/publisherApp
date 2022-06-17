@@ -41,6 +41,7 @@ import { HypPageComponent } from './pages/hyp-page/hyp-page.component';
 import { SecondLoadingComponent } from './shared/components/second-loading/second-loading.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CarouselComponent } from './shell/main/carousel/carousel.component';
+import { PanelComponent } from './admin/panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { CarouselComponent } from './shell/main/carousel/carousel.component';
     EditorComponent,
     DictionaryComponent,
     HypPageComponent,
-    SecondLoadingComponent, AboutUsComponent, CarouselComponent
+    SecondLoadingComponent, AboutUsComponent, CarouselComponent, PanelComponent
   ],
   imports: [
     BrowserModule,

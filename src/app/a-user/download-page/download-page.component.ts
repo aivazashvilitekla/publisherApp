@@ -11,5 +11,10 @@ export class DownloadPageComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  downloadFile(){
+    let link = document.createElement("a");
+    link.download = "Geohyp.exe";
+    link.href = "./GEOHypSetup1.02.exe";
+    link.click();
+  }
 }

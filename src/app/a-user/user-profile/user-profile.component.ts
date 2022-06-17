@@ -15,16 +15,18 @@ export class UserProfileComponent implements OnInit {
   firstName!: string;
   lastName!: string;
   registerDate!: string;
+  premiumVersion!: boolean;
   // user: User | undefined;
 
   constructor(private authservice: AuthenticationService) {}
 
   ngOnInit() {
-    const { firstName, lastName, registerDate } =
+    const { firstName, lastName, registerDate, premium } =
       this.authservice.getUserInfo();
     this.firstName = firstName;
     this.lastName = lastName;
     this.registerDate = format(new Date(registerDate), 'MM/dd/yyyy');
+    this.premiumVersion = premium;
     // console.log(registerDate);
     // console.log(this.firstName, this.lastName, this.registerDate);
   }

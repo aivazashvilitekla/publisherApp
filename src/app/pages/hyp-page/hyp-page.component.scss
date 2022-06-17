@@ -15,6 +15,9 @@
         font-family: 'gilroy';
         font-size: 50px;
         margin-bottom: 1rem;
+        @media screen and (max-width: 560px){
+          font-size: 30px;
+        }
     }
     .editor-container{
         border: 2px solid #5d5a3f;

@@ -13,6 +13,11 @@ main{
         justify-content: center;
         align-items: center;
         margin: 2rem 0;
+        button{
+            align-self: flex-start;
+            font-family: 'kirovi';
+            margin-bottom: 1rem;
+        }
         h1{
             color: white;
             font-size: 20px;

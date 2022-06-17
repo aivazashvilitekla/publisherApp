@@ -100,6 +100,7 @@ export class RegisterComponent implements OnInit {
         lastName: this.userInfo.lastName,
         registerDate: new Date().toString(),
         email: this.user.email,
+        premium: false
       };
       this.loadingService.startLoading();
       this.authService
@@ -109,7 +110,7 @@ export class RegisterComponent implements OnInit {
           next: () => {
             localStorage.setItem(
               'loggedIn',
-              `${this.user.firstName[0]}${this.user.lastName[0]}`.toUpperCase()
+              `${this.user.firstName}${this.user.lastName}`.toUpperCase()
             );
             this.router.navigate(['/']);
           },
