@@ -1,0 +1,10 @@
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <button (click)="getPrev()"><fa-icon [icon]="faArrowCircleLeft"></fa-icon></button>
+  <div class="carousel-inner" role="listbox">
+    <img src="{{ getSlide() }}" alt="slide" />
+  </div>
+
+  
+
+  <button (click)="getNext()"><fa-icon [icon]="faArrowCircleRight"></fa-icon></button>
+</div>

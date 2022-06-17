@@ -40,6 +40,7 @@ import { DictionaryComponent } from './pages/dictionary/dictionary.component';
 import { HypPageComponent } from './pages/hyp-page/hyp-page.component';
 import { SecondLoadingComponent } from './shared/components/second-loading/second-loading.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { CarouselComponent } from './shell/main/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     EditorComponent,
     DictionaryComponent,
     HypPageComponent,
-    SecondLoadingComponent, AboutUsComponent
+    SecondLoadingComponent, AboutUsComponent, CarouselComponent
   ],
   imports: [
     BrowserModule,

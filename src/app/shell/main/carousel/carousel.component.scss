@@ -1,0 +1,23 @@
+#carouselExampleControls{
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  button{
+    background: none;
+    outline: none;
+    fa-icon{
+      color: white;
+      font-size: xx-large;
+
+    }
+  }
+  .carousel-inner{
+    display: flex;
+    justify-content: center;
+    img{
+      height: 600px;
+    }
+  }
+}
