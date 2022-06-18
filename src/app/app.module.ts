@@ -42,6 +42,7 @@ import { SecondLoadingComponent } from './shared/components/second-loading/secon
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CarouselComponent } from './shell/main/carousel/carousel.component';
 import { PanelComponent } from './admin/panel/panel.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,7 @@ import { PanelComponent } from './admin/panel/panel.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     UserRoutingModule,
-    HttpClientModule, AngularEditorModule,
+    HttpClientModule, AngularEditorModule, SlickCarouselModule
     
   ],
   providers: [],

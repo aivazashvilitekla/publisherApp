@@ -1,122 +1,16 @@
-#carouselExampleControls{
-  padding: 1rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-
-  // gap: 0.5rem;
-  // button{
-  //   background: none;
-  //   outline: none;
-  //   fa-icon{
-  //     color: white;
-  //     font-size: xx-large;
-
-  //   }
-  // }
-  // .carousel-inner{
-  //   display: flex;
-  //   justify-content: center;
-  //   width: 100%;
-  //   img{
-  //     width: 100%;
-  //     height: 600px;
-      
-      
-  //   }
-  //   position: relative;
-  //     .dotss{
-  //       z-index: 15615;
-  //       // width: 300px;
-  //       // height: 300px;
-  //       position: absolute;
-  //       bottom: 10px;
-  //       .dot{
-  //         cursor: pointer;
-  //         height: 4px;
-  //         width: 35px;
-  //         margin: 0 2px;
-  //         background-color: #bbb;
-  //         display: inline-block;
-  //         transition: background-color 0.6s ease;
-  //       }
-  //       .active, .dotss:hover {
-  //         background-color: #717171;
-  //       }
-        
-  //     }
-  // }
-}
-// .fade {
-//   -webkit-animation-name: fade;
-//   -webkit-animation-duration: 1.5s;
-//   animation-name: fade;
-//   animation-duration: 1.5s;
-// }
-
-// @-webkit-keyframes fade {
-//   from {opacity: .4}
-//   to {opacity: 1}
-// }
-
-// @keyframes fade {
-//   from {opacity: .4}
-//   to {opacity: 1}
-// }
-
-* {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  width: 95%;
-  position: relative;
+.slick-slider {
+  width: 88%;
   margin: auto;
+  background: rgb(14, 13, 13);
 }
+#slick-car{
 
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 4px;
-  width: 35px;
-  margin: 0 2px;
-  background-color: #bbb;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.2s;
-}
-
-// @-webkit-keyframes fade {
-//   from {opacity: .4}
-//   to {opacity: 1}
-// }
-@keyframes fade {
-  0% {
-    opacity: 0;
-    transform: translateX(2rem);
-  } 
-  100% {
-    opacity: 1;
-    transform: translateX(0);
+  button{
+    display: none !important;
   }
+  .slick-dots li button{
+    background: white !important;
+  }
+  
 }
-// @keyframes fade {
-//   from {opacity: .4}
-//   to {opacity: 1}
-// }
