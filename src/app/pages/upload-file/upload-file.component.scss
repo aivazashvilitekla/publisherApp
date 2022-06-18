@@ -3,6 +3,7 @@
     // width: 100vw;
     // height: 50vh;
     margin: 2rem auto;
+    padding: 3rem;
     color: whitesmoke;
     font-family: 'firago';
     background: url(../../../assets/images/upload-permission.png) no-repeat;
@@ -58,12 +59,21 @@
               gap: 2rem;
               p{
                   font-weight: bold;
+                  margin-bottom: 1rem;
               }
               img{
                   width:50%;
               }
               span{
                   font-family: 'firagoThinItalic';
+                  margin-bottom: 1rem;
+              }
+              .another-span{
+                font-size: smaller;
+                a{
+                    color: rgb(114, 114, 241);
+                    font-weight: bold;
+                }
               }
           }
           
