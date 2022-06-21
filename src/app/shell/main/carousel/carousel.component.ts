@@ -100,7 +100,7 @@ export class CarouselComponent implements OnInit {
     arrows: false,
     autoplay: true,
     fade: true,
-    autoplaySpeed: 1500,
+    autoplaySpeed: 1800,
     dots: true
   };
 

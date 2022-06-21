@@ -1,8 +1,9 @@
 <section class="editor">
-  <h1>გადატანები</h1>
+  <h1>ტექსტის დამარცვლა</h1>
   <div class="editor-container">
     <header>
       <div class="bla">
+        <button class="noStyles smallerbtn" (click)="onPaste($event)"><fa-icon [icon]="faCopy"></fa-icon> მონიშნულის&nbsp;ჩასმა</button>
         <div class="lds-roller" *ngIf="loading">
           <div></div>
           <div></div>
@@ -16,6 +17,11 @@
       </div>
       <div class="check">
         <button (click)="checkText()">დაწყება</button>
+      </div>
+      <div class="copy">
+        <button class="noStyles" (click)="copyText()">მონიშვნა <fa-icon [icon]="faCopy"></fa-icon></button>
+        
+        
       </div>
     </header>
     <main class="editor-main">

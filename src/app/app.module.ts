@@ -43,7 +43,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CarouselComponent } from './shell/main/carousel/carousel.component';
 import { PanelComponent } from './admin/panel/panel.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-
+import { ClipboardModule } from 'ngx-clipboard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +86,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     UserRoutingModule,
-    HttpClientModule, AngularEditorModule, SlickCarouselModule
+    HttpClientModule, AngularEditorModule, SlickCarouselModule,
+    ClipboardModule
     
   ],
   providers: [],
