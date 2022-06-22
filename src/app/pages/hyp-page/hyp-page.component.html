@@ -27,9 +27,67 @@
     <main class="editor-main">
       <div class="text-container">
         <form>
-          <div id="hypCont" contenteditable="true" data-text="ტექსტი..."></div>
+          <div id="hypCont" contenteditable="true" data-text="ტექსტი..." (keypress)="onKeyPress($event)"></div>
         </form>
       </div>
     </main>
+    <footer>
+      <div class="options">
+        <form class="parentForm" *ngIf="parentForm" [formGroup]="parentForm">
+          <div class="CleanSpacesParent">
+            <input
+              type="checkbox"
+              id="CleanSpacesParent"
+              formControlName="cleaning"
+            />
+            <label for="CleanSpacesParent">გასუფთავება</label>
+          </div>
+
+          <div class="HypParent">
+            <input type="checkbox" id="HypParent" formControlName="hyp" />
+            <label for="HypParent">გადატანები</label>
+          </div>
+        </form>
+        <form
+          class="cleaningsForm"
+          *ngIf="optionsForm && showOptionsForm"
+          [formGroup]="optionsForm"
+        >
+          <div class="CleanSpaces">
+            <input
+              type="checkbox"
+              id="CleanSpaces"
+              formControlName="cleanSpaces"
+            />
+            <label for="CleanSpaces">ჰარების გასუფთავება</label>
+          </div>
+          <div class="CleanExcessParagraphs">
+            <input
+              type="checkbox"
+              id="CleanExcessParagraphs"
+              formControlName="cleanExcessParagraphs"
+            />
+            <label for="CleanExcessParagraphs">ორმაგი პარაგრაფების გასუფთავება</label>
+          </div>
+          <div class="CleanNewLines">
+            <input
+              type="checkbox"
+              id="CleanNewLines"
+              formControlName="cleanNewLines"
+            />
+            <label for="CleanNewLines">ქვედა ხაზის პარაგრაფად გადაქცევა</label>
+          </div>
+          
+          <div class="CorrectPDashStarts">
+            <input
+              type="checkbox"
+              id="CorrectPDashStarts"
+              formControlName="correctPDashStarts"
+            />
+            <label for="CorrectPDashStarts">ქართული დეფისი</label>
+          </div>
+        </form>
+      </div>
+    </footer>
   </div>
 </section>

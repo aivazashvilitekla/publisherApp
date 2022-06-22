@@ -63,6 +63,25 @@ export class EditorComponent implements OnInit {
     private http: HttpClient,
     private toastrService: ToastrMessagesService
   ) {}
+  findMorphologies(el: any) {
+    this.http
+      .post('https://localhost:44371/api/Morphology/FindMorphologies', {
+        Text: el,
+      })
+      .subscribe({
+        next: (res: any) => {
+          this.wordsInfo = Object.keys(res.occurrences);
+          el.innerHTML = res.textDTO.Text;
+        },
+        complete: () => {
+          this.loading = false;
+          this.checked = true;
+        },
+        error: () => {
+          this.loading = false;
+        }
+      });
+  }
   checkText() {
     const el = document.getElementById('bla');
     if (el && el.innerText && this.editorForm) {
@@ -70,7 +89,22 @@ export class EditorComponent implements OnInit {
         this.editorForm.value.barbarisms ||
         this.editorForm.value.morphology
       ) {
-        if (this.editorForm.value.barbarisms) {
+        if (
+          this.editorForm.value.barbarisms &&
+          this.editorForm.value.morphology
+        ) {
+          this.loading = true;
+          this.http
+            .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
+              Text: el?.innerText,
+            })
+            .subscribe({
+              complete: () => {
+                this.findMorphologies(el);
+              },
+            });
+        }
+        else if (this.editorForm.value.barbarisms && !this.editorForm.value.morphology) {
           this.loading = true;
           this.http
             .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
@@ -81,10 +115,21 @@ export class EditorComponent implements OnInit {
               el.innerHTML = res.textDTO.Text;
               this.loading = false;
               this.checked = true;
-              console.log(this.wordsInfo);
             });
-        } else {
-          // TODO
+        }
+        else if (this.editorForm.value.morphology && !this.editorForm.value.barbarisms) {
+          this.loading = true;
+          console.log(el.innerText)
+          this.http
+            .post('https://localhost:44371/api/Morphology/FindMorphologies', {
+              Text: el?.innerText,
+            })
+            .subscribe((res: any) => {
+              this.wordsInfo = Object.keys(res.occurrences);
+              el.innerHTML = res.textDTO.Text;
+              this.loading = false;
+              this.checked = true;
+            });
         }
       } else {
         this.toastrService.showErrorMessage(

@@ -18,7 +18,18 @@
       <div class="check">
         <button (click)="checkText()">შეამოწმე</button>
       </div>
-      
+      <div class="options">
+        <form *ngIf="editorForm" [formGroup]="editorForm">
+          <div class="morphology">
+            <input type="checkbox" id="morphology" formControlName="morphology" />
+            <label for="morphology">მორფოლოგია</label>
+          </div>
+          <div class="barbarisms">
+            <input type="checkbox" id="barbarisms" formControlName="barbarisms" />
+            <label for="barbarisms">ბარბარიზმები</label>
+          </div>
+        </form>
+      </div>
     </header>
     <main class="editor-main">
       <div class="text-container">
@@ -40,7 +51,7 @@
         </main>
       </div>
     </main>
-    <footer>
+    <!-- <footer>
       <div class="options">
         <form *ngIf="editorForm" [formGroup]="editorForm">
           <div class="morphology">
@@ -53,6 +64,6 @@
           </div>
         </form>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </section>

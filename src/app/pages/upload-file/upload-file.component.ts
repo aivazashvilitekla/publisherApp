@@ -95,7 +95,6 @@ export class UploadFileComponent implements OnInit {
       cleanSpaces: [false],
       cleanExcessParagraphs: [false],
       cleanNewLines: [false],
-      cleanTabs: [false],
       correctPDashStarts: [false],
     });
   }
@@ -152,14 +151,12 @@ export class UploadFileComponent implements OnInit {
         formValues.cleanSpaces ||
         formValues.cleanExcessParagraphs ||
         formValues.cleanNewLines ||
-        formValues.cleanTabs ||
         formValues.correctPDashStarts
       ) {
-        const apiUrl = `https://localhost:44371/api/CleanDoc/${this.filename}?CleanSpaces=${formValues.cleanSpaces}&CleanExcessParagraphs=${formValues.cleanExcessParagraphs}&CleanNewLines=${formValues.cleanNewLines}&CleanTabs=${formValues.cleanTabs}&CorrectPDashStarts=${formValues.correctPDashStarts}`;
+        const apiUrl = `https://localhost:44371/api/CleanDoc/${this.filename}?CleanSpaces=${formValues.cleanSpaces}&CleanExcessParagraphs=${formValues.cleanExcessParagraphs}&CleanNewLines=${formValues.cleanNewLines}&CleanTabs=${formValues.cleanSpaces}&CorrectPDashStarts=${formValues.correctPDashStarts}`;
 
         this.stepsVar = Steps.Processing;
         this.fileProcessing = true;
-        console.log(this.filename, 'from cleaning');
         const file$ = this.apiService.cleanDoc(apiUrl);
         file$.subscribe({
           complete: () => {
@@ -178,7 +175,6 @@ export class UploadFileComponent implements OnInit {
     } else if (this.parentForm.value.hyp && !this.parentForm.value.cleaning) {
       this.stepsVar = Steps.Processing;
       this.fileProcessing = true;
-      console.log(this.filename);
       const file$ = this.apiService.hypDoc(
         `https://localhost:44371/api/HypDoc/${this.filename}`
       );
@@ -186,9 +182,6 @@ export class UploadFileComponent implements OnInit {
         {
           next: (res: any) => {
             this.filename = res.FileName;
-            console.log('bla');
-
-            // this.getPages();
           },
           complete: () => {
             this.fileProcessing = false;
@@ -199,12 +192,6 @@ export class UploadFileComponent implements OnInit {
             this.toastrService.showErrorMessage(`${error}`);
           },
         }
-
-        // (res: any) => {
-        // this.filename = res.FileName;
-        // this.fileProcessing = false;
-        // this.doneProcessing = true;
-        // }
       );
     } else if (this.parentForm.value.cleaning && !this.parentForm.value.hyp) {
       if (this.optionsForm) {
@@ -218,16 +205,6 @@ export class UploadFileComponent implements OnInit {
           formValues.correctPDashStarts
         ) {
           const apiUrl = `https://localhost:44371/api/CleanDoc/${this.filename}?CleanSpaces=${formValues.cleanSpaces}&CleanOldHyphenation=${formValues.cleanOldHyphenation}&CleanExcessParagraphs=${formValues.cleanExcessParagraphs}&CleanNewLines=${formValues.cleanNewLines}&CleanTabs=${formValues.cleanTabs}&CorrectPDashStarts=${formValues.correctPDashStarts}`;
-          // this.formBody = {
-          //   CleanSpaces: formValues.cleanSpaces,
-          //   CleanOldHyphenation: formValues.cleanOldHyphenation,
-          //   CleanExcessParagraphs: formValues.cleanExcessParagraphs,
-          //   CleanNewLines: formValues.cleanNewLines,
-          //   CleanTabs: formValues.cleanTabs,
-          //   CorrectPDashStarts: formValues.correctPDashStarts,
-          // };
-          // console.log(this.formBody);
-          // console.log(this.filename);
 
           this.stepsVar = Steps.Processing;
           this.fileProcessing = true;
@@ -235,8 +212,6 @@ export class UploadFileComponent implements OnInit {
           file$.subscribe({
             next: (res: any) => {
               this.filename = res.FileName;
-
-              // this.getPages();
             },
             complete: () => {
               this.fileProcessing = false;
@@ -246,18 +221,6 @@ export class UploadFileComponent implements OnInit {
               this.fileProcessing = false;
               this.toastrService.showErrorMessage(`${error}`);
             },
-            // complete: () => {
-            //   (res: any) => {
-            //     this.filename = res.FileName;
-            //     this.fileProcessing = false;
-            //     this.doneProcessing = true;
-            //   };
-            // },
-            // error: () => {
-            //   (res: any) => {
-            //     this.fileProcessing = false;
-            //   };
-            // },
           });
         } else {
           this.toastrService.showErrorMessage(
@@ -272,7 +235,6 @@ export class UploadFileComponent implements OnInit {
     }
   }
   hypDoc(temp: any) {
-    console.log(this.filename, 'from hyp');
     return this.apiService
       .hypDoc(`https://localhost:44371/api/HypDoc/${temp}`)
       .subscribe({

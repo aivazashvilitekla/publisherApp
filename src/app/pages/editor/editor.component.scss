@@ -58,6 +58,32 @@
                 background: #00ed86;
             }
             padding: 1rem 0;
+            .options{
+                
+              form{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                justify-content: center;
+                &>div{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 0.3rem;
+                  input[type=checkbox]{
+                      background: black;
+                      border: 1px solid gray;
+                  }
+                }
+                @media screen and (max-width: 560px){
+                  flex-direction: column;
+                  gap: 1rem;
+                  padding: 0.5rem 0;
+                }
+              }
+                         
+          }
         }
         footer{
             border-top: 2px solid #5d5a3f;
