@@ -14,6 +14,7 @@ export class EditorComponent implements OnInit {
   checked: boolean = false;
   loading = false;
   wordsInfo: any = {};
+  tempHolder: any;
 
   editorForm: FormGroup | undefined;
   editorConfig: AngularEditorConfig = {
@@ -63,25 +64,6 @@ export class EditorComponent implements OnInit {
     private http: HttpClient,
     private toastrService: ToastrMessagesService
   ) {}
-  findMorphologies(el: any) {
-    this.http
-      .post('https://localhost:44371/api/Morphology/FindMorphologies', {
-        Text: el,
-      })
-      .subscribe({
-        next: (res: any) => {
-          this.wordsInfo = Object.keys(res.occurrences);
-          el.innerHTML = res.textDTO.Text;
-        },
-        complete: () => {
-          this.loading = false;
-          this.checked = true;
-        },
-        error: () => {
-          this.loading = false;
-        }
-      });
-  }
   checkText() {
     const el = document.getElementById('bla');
     if (el && el.innerText && this.editorForm) {
@@ -96,19 +78,40 @@ export class EditorComponent implements OnInit {
           this.loading = true;
           this.http
             .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
-              Text: el?.innerText,
+              Text: el?.innerHTML,
             })
             .subscribe({
+              next: (res: any) => {
+                this.wordsInfo = Object.keys(res.occurrences);
+                this.tempHolder = res.textDTO.Text
+              },
               complete: () => {
-                this.findMorphologies(el);
+                this.http
+                  .post(
+                    'https://localhost:44371/api/Morphology/FindMorphologies',
+                    {
+                      Text: this.tempHolder,
+                    }
+                  )
+                  .subscribe((res: any) => {
+                    this.wordsInfo = [...this.wordsInfo, Object.keys(res.occurrences)];
+                    el.innerHTML = res.textDTO.Text;
+                    this.loading = false;
+                    this.checked = true;
+                  });
+              },
+              error: (error) => {
+                this.toastrService.showErrorMessage(`${error}`);
               },
             });
-        }
-        else if (this.editorForm.value.barbarisms && !this.editorForm.value.morphology) {
+        } else if (
+          this.editorForm.value.barbarisms &&
+          !this.editorForm.value.morphology
+        ) {
           this.loading = true;
           this.http
             .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
-              Text: el?.innerText,
+              Text: el?.innerHTML,
             })
             .subscribe((res: any) => {
               this.wordsInfo = Object.keys(res.occurrences);
@@ -116,13 +119,14 @@ export class EditorComponent implements OnInit {
               this.loading = false;
               this.checked = true;
             });
-        }
-        else if (this.editorForm.value.morphology && !this.editorForm.value.barbarisms) {
+        } else if (
+          this.editorForm.value.morphology &&
+          !this.editorForm.value.barbarisms
+        ) {
           this.loading = true;
-          console.log(el.innerText)
           this.http
             .post('https://localhost:44371/api/Morphology/FindMorphologies', {
-              Text: el?.innerText,
+              Text: el?.innerHTML,
             })
             .subscribe((res: any) => {
               this.wordsInfo = Object.keys(res.occurrences);
@@ -139,24 +143,9 @@ export class EditorComponent implements OnInit {
     } else {
       this.toastrService.showErrorMessage('ტექსტის ველი ცარიელია...');
     }
-    // if (this.editorForm?.valid) {
-    //   const value = this.editorForm.value;
-    //   // console.log(value.htmlContent);
-    //   this.http
-    //     .post('https://localhost:44371/api/Barbarism/FindBarbarisms', {
-    //       Text: value.htmlContent,
-    //     })
-    //     .subscribe((res: any) =>
-    //       // console.log(res.textDTO.Text)
-    //       this.editorForm?.patchValue({
-    //         htmlContent: res.textDTO.Text,
-    //       })
-    //     );
-    // }
   }
   ngOnInit() {
     this._initEditorForm();
-    console.log(this.editorForm?.value);
   }
   private _initEditorForm() {
     this.editorForm = this.fb.group({
