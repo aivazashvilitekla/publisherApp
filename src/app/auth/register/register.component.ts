@@ -23,7 +23,9 @@ export class RegisterComponent implements OnInit {
   faEye = faEye;
 
   registerForm: FormGroup | undefined;
+  regFormInitialValue: FormGroup | undefined;
   registerInfo: FormGroup | undefined;
+  redInfoInitialForm: FormGroup | undefined;
   registerPic: FormGroup | undefined;
   submitted = false;
   passwordVisibility = false;
@@ -60,12 +62,14 @@ export class RegisterComponent implements OnInit {
         validators: MatchPassword,
       }
     );
+    this.regFormInitialValue = this.registerForm.value;
   }
   private _initRegisterInfo() {
     this.registerInfo = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
     });
+    this.redInfoInitialForm = this.registerInfo.value;
   }
   private _initRegisterPic() {
     this.registerPic = this.fb.group({
@@ -79,9 +83,7 @@ export class RegisterComponent implements OnInit {
       this.user = this.registerForm.value;
       this.step++;
     } else {
-      this.toastrService.showErrorMessage(
-        'Not all fields in form group are valid.'
-      );
+      this.toastrService.showErrorMessage('გთხოვთ შეავსეთ ყველა ველი.');
     }
   }
   toStepThree() {
@@ -100,7 +102,7 @@ export class RegisterComponent implements OnInit {
         lastName: this.userInfo.lastName,
         registerDate: new Date().toString(),
         email: this.user.email,
-        premium: false
+        premium: false,
       };
       this.loadingService.startLoading();
       this.authService
@@ -130,5 +132,13 @@ export class RegisterComponent implements OnInit {
   }
   toggleConfirmPassword() {
     this.confirmPasswordVisibility = !this.confirmPasswordVisibility;
+  }
+  back() {
+    this.step = 1;
+    this.submitted = false
+    this.registerInfo?.reset();
+    this.registerForm?.reset();
+    this._initRegisterForm();
+    this._initRegisterInfo();
   }
 }
