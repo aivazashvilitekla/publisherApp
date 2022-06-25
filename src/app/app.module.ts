@@ -44,6 +44,7 @@ import { CarouselComponent } from './shell/main/carousel/carousel.component';
 import { PanelComponent } from './admin/panel/panel.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ClipboardModule } from 'ngx-clipboard';
+import { DownloadPageComponent } from './a-user/download-page/download-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,11 @@ import { ClipboardModule } from 'ngx-clipboard';
     EditorComponent,
     DictionaryComponent,
     HypPageComponent,
-    SecondLoadingComponent, AboutUsComponent, CarouselComponent, PanelComponent
+    SecondLoadingComponent,
+    AboutUsComponent,
+    CarouselComponent,
+    PanelComponent,
+    DownloadPageComponent
   ],
   imports: [
     BrowserModule,
@@ -86,9 +91,10 @@ import { ClipboardModule } from 'ngx-clipboard';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     UserRoutingModule,
-    HttpClientModule, AngularEditorModule, SlickCarouselModule,
-    ClipboardModule
-    
+    HttpClientModule,
+    AngularEditorModule,
+    SlickCarouselModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

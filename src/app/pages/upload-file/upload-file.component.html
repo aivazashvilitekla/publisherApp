@@ -126,10 +126,10 @@
   
 </section>
 <!--  -->
-<section id="processing-section" *ngIf="stepsVar == steps.Processing">
+<section id="processing-section" class="processing-section-class" *ngIf="stepsVar == steps.Processing">
   <div class="processing-container">
     <header>
-      <div class="author">
+      <div class="author" id="author">
         <div class="img">
           <img src="{{ selectedWork?.img }}" alt="author" />
         </div>
@@ -169,7 +169,7 @@
       </div>
       <div class="waiting">
         <div class="while-processing">
-          <p>
+          <p id="unsettable-p">
             ვიდრე დოკუმენტი გამზადდება,<br />
             იკითხე ქართული ლიტერატურა
           </p>

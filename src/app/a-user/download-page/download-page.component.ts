@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-download-page',
   templateUrl: './download-page.component.html',
   styleUrls: ['./download-page.component.scss']
 })
 export class DownloadPageComponent implements OnInit {
+  faDownload = faDownload
 
   constructor() { }
 

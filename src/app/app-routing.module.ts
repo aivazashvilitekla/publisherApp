@@ -30,9 +30,7 @@ import { MainComponent } from './shell/main/main.component';
 const routes: Routes = [
   {
     path: '',
-    // canActivate: [AnonymousGuard],
     component: HomepageComponent,
-    // pathMatch: 'full',
     children: [
       {
         path: '',

@@ -5,16 +5,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    img{
+        width: 80%;
+        height: 60%;
+        border-radius: 50px;
+    }
     .card{
+        margin: 2rem 0;
         cursor: pointer;
         padding: 2rem 0;
-        background-color: #035569;
+        // background-color: #035569;
+        background: none;
+        border: 1px solid #035569;
         color: white;
         font-family: 'firago';
         border-radius: 1rem;
         text-align: center;
         a{
             color: white;
+            font-size: large;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
         }
     }
 }
+

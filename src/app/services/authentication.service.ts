@@ -31,6 +31,10 @@ export class AuthenticationService {
       })
     );
   }
+  // Sign out
+  SignOut() {
+    return from(this.afAuth.signOut());
+  }
   getUserInfo() {
     const userObj = JSON.parse(this._currentUser?.displayName as string);
     const firstName = userObj.firstName;
@@ -40,8 +44,5 @@ export class AuthenticationService {
     const premium = userObj.premium;
     return { firstName, lastName, registerDate, email, premium };
   }
-  // Sign out
-  SignOut() {
-    return from(this.afAuth.signOut());
-  }
+  
 }
